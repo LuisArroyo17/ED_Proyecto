@@ -1,6 +1,8 @@
+import osmnx as ox
+import networkx as nx
 class Graph:
-    def __init__(self):
-        self.nodes = {}
+    def __init__(self, graph_file):
+        self.graph = ox.load_graphml(graph_file) #../san_miguel.graphml
         self.edges = {}
 
     def add_node(self, value):
@@ -13,6 +15,8 @@ class Graph:
         else:
             raise ValueError("Both nodes must exist in the graph")
 
-    def get_shortest_path(self, start_node, end_node):
-        # Implementación de algoritmo para encontrar el camino más corto
-        pass
+    def get_shortest_path(self, start_point, end_point):
+        start_node = ox.get_nearest_node(self.graph, start_point)
+        end_node = ox.get_nearest_node(self.graph, end_point)
+        shortest_path = nx.shortest_path(self.graph, start_node, end_node, weight='length')
+        return shortest_path
