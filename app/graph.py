@@ -1,7 +1,7 @@
 import osmnx as ox
 import networkx as nx
 class Graph:
-    def __init__(self, graph_file):
+    def __init__(self,graph_file="../san_miguel.graphml" ):
         self.graph = ox.load_graphml(graph_file) #../san_miguel.graphml
         self.edges = {}
 
@@ -20,3 +20,4 @@ class Graph:
         end_node = ox.get_nearest_node(self.graph, end_point)
         shortest_path = nx.shortest_path(self.graph, start_node, end_node, weight='length')
         return shortest_path
+    

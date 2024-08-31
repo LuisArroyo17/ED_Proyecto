@@ -8,3 +8,4 @@ def optimize_route():
     # Aquí iría la lógica para optimizar la ruta usando el grafo
     optimized_route = {}  # Reemplaza con la lógica de optimización
     return jsonify(optimized_route)
+
