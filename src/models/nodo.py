@@ -1,8 +1,8 @@
-from utils.conectarDB import Database
+from utils.conectarDB import DB
 
 class ModelNodo:
   def __init__(self):
-    self.db = Database().connection()
+    self.db = DB().connection()
 
   def __del__(self):
     if self.db:
