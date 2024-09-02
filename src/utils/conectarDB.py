@@ -3,7 +3,7 @@ import pymysql.cursors
 from dotenv import load_dotenv
 import os
 
-load_dotenv(dotenv_path=".envvars")
+load_dotenv(dotenv_path="../.envvars")
 
 class DB:
     def __init__(self):
@@ -21,10 +21,10 @@ class DB:
 
     def connection(self):
         db = pymysql.connections.Connection(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME"),
+            host="localhost",#os.getenv("DB_HOST"),
+            user="root",#os.getenv("DB_USER"),
+            password="77063414",#os.getenv("DB_PASSWORD"),
+            database="ed_proyecto",#os.getenv("DB_NAME"),
             cursorclass=pymysql.cursors.DictCursor
         )
         print("Conexión exitosa")
