@@ -27,11 +27,11 @@ class DB:
             database=os.getenv("DB_NAME"),
             cursorclass=pymysql.cursors.DictCursor
         )
+        print("Conexión exitosa")
         return db
 
     def crear_tablas(self):
         db = self.connection()
-        cursor = db.cursor()
         try:
             cursor= db.cursor()
             
