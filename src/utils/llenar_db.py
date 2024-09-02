@@ -5,7 +5,7 @@ from os.path import dirname, abspath
 
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
-# from models.nodo import ModelNodo
+from models.nodo import ModelNodo
 # from models.arista import ModelArista
 
 
@@ -16,7 +16,7 @@ G = ox.graph_from_place(place_name, network_type="drive")
 for node in G.nodes:
   lat = G.nodes[node]["y"]
   long = G.nodes[node]["x"]
-#   ModelNodo().post_one_nodo(node, lat, long)
+  ModelNodo().post_one_nodo(node, lat, long)
 
 for node in G.nodes:
   # print(f"id: {node}, latitud: {G.nodes[node]['y']}, longitud: {G.nodes[node]['x']}")
