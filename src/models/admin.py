@@ -1,11 +1,11 @@
 from utils.conectarDB import DB
 
 class AdminModel:
-    def __init__(self):
+    def __init__(self) :
         self.db = DB.connection()
         
     def __del__(self):
-        if self.ed:
+        if self.db:
             self.db.close()
         
     def insertar_admin(self, username, password, first_name, last_name):
