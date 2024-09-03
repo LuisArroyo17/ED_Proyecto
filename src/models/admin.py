@@ -10,9 +10,13 @@ class AdminModel:
         
     def insertar_admin(self, username, password, first_name, last_name):
         cursor = self.db.cursor()
-        cursor.execute("""
-            insert into admin (username, password, first_name, last_name)
-            values (%s, %s, %s, %s)
-        """, (username, password, first_name, last_name))
-        self.db.commit()
-        cursor.close()
+        try:
+            cursor.execute("""
+                insert into admin (username, password, first_name, last_name)
+                values (%s, %s, %s, %s)
+            """, (username, password, first_name, last_name))
+            self.db.commit()
+            cursor.close()
+            return True
+        except Exception as e:
+            print(f"Error: {e}")
