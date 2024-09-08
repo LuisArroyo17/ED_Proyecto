@@ -1,6 +1,6 @@
 venv/
 __pycache__/
 instance/
-waza
+
 # nombre del entorno virtual
-.env
+env
