@@ -3,4 +3,4 @@ __pycache__/
 instance/
 
 # nombre del entorno virtual
-env
+.env
