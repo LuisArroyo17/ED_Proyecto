@@ -22,7 +22,21 @@ class AdminModel:
             print(f"Error: {e}")
             # Devuelve una respuesta en caso de error
             return { "status": "error", "message": "No se pudo insertar el admin", "error": str(e) }, 500
-
+    def loginDB(self, username, password):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("""
+                SELECT * FROM admin
+                WHERE username = %s AND password = %s
+            """, (username, password))
+            admin = cursor.fetchone()
+            if admin:
+                return { "admin": admin }, 200
+            return { "error": "No se encontro el admin" }, 404
+        except Exception as e:
+            print(f"Error: {e}")
+            # Devuelve una respuesta en caso de error
+            return { "status": "error", "message": "No se pudo loguear", "error": str(e) }, 500
 
 
 

@@ -12,3 +12,11 @@ class AdminController:
         if response:
             return response
         return { "error": "No se pudo registrar" }, 400
+    @staticmethod
+    def login():
+        username = request.json.get('username')
+        password = request.json.get('password')
+        response = AdminModel().loginDB(username, password)
+        if response:
+            return response
+        return { "error": "No se pudo loguear" }, 400
