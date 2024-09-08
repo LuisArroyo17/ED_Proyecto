@@ -35,6 +35,7 @@ class DB:
         try:
             cursor= db.cursor()
             
+            # crear tabla admin
             cursor.execute("""
                 create table if not exists admin
                 (
@@ -46,7 +47,8 @@ class DB:
                 last_name  varchar(50) not null
                 );
             """)
-
+            
+            # crear tabla cliente
             cursor.execute("""
                 create table if not exists client
                 (
@@ -57,7 +59,8 @@ class DB:
                 longitud  double      not null
                 );
             """)
-
+            
+            # crear tabla nodo
             cursor.execute("""
                 create table if not exists nodo
                 (
@@ -67,7 +70,7 @@ class DB:
                 longitud double not null
                 );
             """)         
-
+            # crear tabla arista
             cursor.execute("""
                 create table if not exists arista
                 (
@@ -82,7 +85,15 @@ class DB:
                     foreign key (destino) references nodo (id_nodo)
                 );
             """)
-
+            # crear tabla productos
+            cursor.execute("""CREATE TABLE productos (
+                id SERIAL PRIMARY KEY,
+                nombre VARCHAR(100) NOT NULL,
+                categoria VARCHAR(50) NOT NULL,
+                precio NUMERIC(10, 2) NOT NULL,
+                descripcion VARCHAR(255)
+                );
+            """)
             db.commit()
             print("Tablas creadas")
         except Exception as e:

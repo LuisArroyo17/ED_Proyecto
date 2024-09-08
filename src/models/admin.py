@@ -22,6 +22,7 @@ class AdminModel:
             print(f"Error: {e}")
             # Devuelve una respuesta en caso de error
             return { "status": "error", "message": "No se pudo insertar el admin", "error": str(e) }, 500
+        
     def loginDB(self, username, password):
         cursor = self.db.cursor()
         try:
