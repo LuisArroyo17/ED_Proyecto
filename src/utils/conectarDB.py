@@ -69,7 +69,8 @@ class DB:
                 latitud  double not null,
                 longitud double not null
                 );
-            """)         
+            """)        
+             
             # crear tabla arista
             cursor.execute("""
                 create table if not exists arista
