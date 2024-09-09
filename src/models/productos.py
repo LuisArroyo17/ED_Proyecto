@@ -55,3 +55,12 @@ class ModelProducto :
             return { "message": "Producto actualizado." }
         except:
             return { "error": "Error durante la actualización del producto."}
+    
+    def eliminar_productoDB(self, id):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("DELETE FROM productos WHERE id = %s;", (id,))
+            self.db.commit()
+            return { "message": "Producto eliminado." }
+        except:
+            return { "error": "Error durante la eliminación del producto."}

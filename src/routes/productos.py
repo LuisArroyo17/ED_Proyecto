@@ -20,6 +20,6 @@ def agregar_producto1():
 def actualizar_producto1(id):
     return ProductosController().actualizar_producto(id)
 
-@productos_blueprint.route('/productos/<int:id>', methods=['DELETE'])
+@productos_blueprint.route('/productos/<int:id>', methods=['DELETE']) #Listo
 def eliminar_producto1(id):
     return ProductosController().eliminar_producto(id)

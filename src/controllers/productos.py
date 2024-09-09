@@ -25,12 +25,14 @@ class ProductosController:
         return producto
     
     @staticmethod
-    def eliminar_producto(self, nombre):
-        producto = self.buscar_producto(nombre)
-        if producto:
-            self.productos.remove(producto)
-            return True
-        return False
+    def eliminar_producto(id):
+        producto=ModelProducto().eliminar_productoDB(id)
+        if producto.get("message") == "Producto eliminado.":
+            print (producto)
+            return producto
+        else:
+            return { "error": "Producto no encontrado." }
+        
     
     @staticmethod
     def actualizar_producto(id):
