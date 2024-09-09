@@ -16,10 +16,10 @@ def obtener_producto1(id):
 def agregar_producto1():
     return ProductosController().agregar_producto()
 
-@productos_blueprint.route('/productos/<int:id>', methods=['PUT'])
-def actualizar_producto1():
+@productos_blueprint.route('/Actualizarproductos/<int:id>', methods=['PUT'])
+def actualizar_producto1(id):
     return ProductosController().actualizar_producto(id)
 
 @productos_blueprint.route('/productos/<int:id>', methods=['DELETE'])
-def eliminar_producto1():
+def eliminar_producto1(id):
     return ProductosController().eliminar_producto(id)

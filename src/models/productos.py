@@ -2,9 +2,12 @@ from utils.conectarDB import DB
 
 
 class ModelProducto :
-    def __init__(self):
+    def __init__(self)-> None:
         self.db = DB().connection()
-
+    def __del__(self) -> None:
+        if self.db:
+            self.db.close()
+            
     def agregar_productoDB(self, nombre, precio, categoria, descripcion):
         cursor = self.db.cursor()
         try:
@@ -39,3 +42,16 @@ class ModelProducto :
                 return { "error": "Producto no encontrado." }
         except:
             return { "error": "Error durante la consulta a la tabla productos."}
+        
+    def actualizar_productoDB(self, id, nombre, precio, categoria, descripcion):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("""
+                UPDATE productos
+                SET nombre = %s, precio = %s, categoria = %s, descripcion = %s
+                WHERE id = %s;
+            """, (nombre, precio, categoria, descripcion, id))
+            self.db.commit()
+            return { "message": "Producto actualizado." }
+        except:
+            return { "error": "Error durante la actualización del producto."}

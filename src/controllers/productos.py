@@ -33,6 +33,16 @@ class ProductosController:
         return False
     
     @staticmethod
-    def actualizar_producto(self, id):
-        producto = self.obtener_producto(id)
-        return False
+    def actualizar_producto(id):
+        print(id)
+        nombre = request.json.get('nombre')
+        precio = request.json.get('precio')
+        categoria = request.json.get('categoria')
+        descripcion = request.json.get('descripcion')
+        
+        if not all([nombre, precio, categoria, descripcion]):
+            return { "error": "Faltan datos para actualizar el producto." }, 400
+        
+        resultado= ModelProducto.actualizar_productoDB( id, nombre, precio, categoria, descripcion)
+  
+        return resultado
