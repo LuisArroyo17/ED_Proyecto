@@ -1,12 +1,6 @@
-import osmnx as ox
+
 from conectarDB import DB
 
-import sys
-from os.path import dirname, abspath
-
-sys.path.insert(0, dirname(dirname(abspath(__file__))))
-
-from models.nodo import ModelNodo
 # from models.arista import ModelArista
 
 db= DB().connection()
