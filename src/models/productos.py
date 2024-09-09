@@ -42,7 +42,7 @@ class ModelProducto :
                 return { "error": "Producto no encontrado." }
         except:
             return { "error": "Error durante la consulta a la tabla productos."}
-        
+    
     def actualizar_productoDB(self, id, nombre, precio, categoria, descripcion):
         cursor = self.db.cursor()
         try:

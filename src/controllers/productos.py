@@ -42,7 +42,7 @@ class ProductosController:
         
         if not all([nombre, precio, categoria, descripcion]):
             return { "error": "Faltan datos para actualizar el producto." }, 400
-        
-        resultado= ModelProducto.actualizar_productoDB( id, nombre, precio, categoria, descripcion)
+        producto_modelo = ModelProducto()
+        resultado= producto_modelo.actualizar_productoDB( id, nombre, precio, categoria, descripcion)
   
         return resultado
