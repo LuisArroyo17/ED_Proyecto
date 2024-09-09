@@ -1,1 +1,2 @@
 from routes.admin import admin_blueprint
+from routes.productos import productos_blueprint
