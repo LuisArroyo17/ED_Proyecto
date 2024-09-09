@@ -3,13 +3,17 @@ from models.productos import ModelProducto
 
 class ProductosController:
     @staticmethod
-    def obtener_productos(self):
+    def obtener_productos():
         productos=ModelProducto().obtener_productos()
         return productos
     @staticmethod
-    def obtener_producto(self, id):
-        producto=ModelProducto().obtener_producto(id)
-        return producto
+    def obtener_producto(id):
+        producto=ModelProducto().obtener_productoDB_ID(id)
+        if producto.get("data"):
+            return producto
+        else:
+            return { "error": "Producto no encontrado." }
+    
     @staticmethod
     def agregar_producto():
         nombre = request.json.get('nombre')

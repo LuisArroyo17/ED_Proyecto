@@ -28,11 +28,14 @@ class ModelProducto :
         except:
             return { "error": "Error durante la consulta a la tabla productos."}
         
-    def obtener_producto(self, id):
+    def obtener_productoDB_ID(self, id):
         cursor = self.db.cursor()
         try:
             cursor.execute("SELECT * FROM productos WHERE id = %s;", (id,))
             response = cursor.fetchone()
-            return { "data": response }
+            if response:
+                return { "data": response }
+            else:
+                return { "error": "Producto no encontrado." }
         except:
             return { "error": "Error durante la consulta a la tabla productos."}
