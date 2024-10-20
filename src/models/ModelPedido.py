@@ -50,4 +50,3 @@ class ModelPedido:
             return {"message": "Pedido eliminado", "row_count": cursor.rowcount}, 200
         except Exception as e:
             return {"status": "error", "message": str(e)}, 500
-# asasasasasA
