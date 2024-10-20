@@ -1,2 +1,3 @@
-from routes.admin import admin_blueprint
+from routes.pedidos import pedidos_blueprint
+from routes.usuarios import usuarios_blueprint
 from routes.productos import productos_blueprint

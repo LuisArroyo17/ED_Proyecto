@@ -1,1 +1,1 @@
-from controllers.admin import *
+from controllers import *
