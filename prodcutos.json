@@ -1,0 +1,338 @@
+[
+    {
+        "nombre": "Camiseta Básica",
+        "precio": 12.99,
+        "categoria": "Ropa",
+        "descripcion": "Camiseta de algodón 100% en varios colores.",
+        "stock": 150
+    },
+    {
+        "nombre": "Zapatillas Deportivas",
+        "precio": 59.99,
+        "categoria": "Calzado",
+        "descripcion": "Zapatillas ligeras y cómodas para correr.",
+        "stock": 80
+    },
+    {
+        "nombre": "Auriculares Inalámbricos",
+        "precio": 29.99,
+        "categoria": "Electrónica",
+        "descripcion": "Auriculares con Bluetooth y cancelación de ruido.",
+        "stock": 120
+    },
+    {
+        "nombre": "Reloj Inteligente",
+        "precio": 79.99,
+        "categoria": "Electrónica",
+        "descripcion": "Reloj con múltiples funciones de monitoreo de salud.",
+        "stock": 50
+    },
+    {
+        "nombre": "Silla de Oficina",
+        "precio": 89.99,
+        "categoria": "Muebles",
+        "descripcion": "Silla ergonómica con soporte lumbar ajustable.",
+        "stock": 30
+    },
+    {
+        "nombre": "Laptop 14 pulgadas",
+        "precio": 499.99,
+        "categoria": "Electrónica",
+        "descripcion": "Laptop ligera con procesador Intel Core i5.",
+        "stock": 25
+    },
+    {
+        "nombre": "Mesa de Centro",
+        "precio": 45.99,
+        "categoria": "Muebles",
+        "descripcion": "Mesa de centro de madera con diseño moderno.",
+        "stock": 40
+    },
+    {
+        "nombre": "Bolso de Mano",
+        "precio": 22.99,
+        "categoria": "Accesorios",
+        "descripcion": "Bolso elegante de cuero sintético.",
+        "stock": 60
+    },
+    {
+        "nombre": "Set de Cubiertos",
+        "precio": 14.99,
+        "categoria": "Hogar",
+        "descripcion": "Set de cubiertos de acero inoxidable para 6 personas.",
+        "stock": 100
+    },
+    {
+        "nombre": "Gafas de Sol",
+        "precio": 19.99,
+        "categoria": "Accesorios",
+        "descripcion": "Gafas de sol polarizadas con protección UV.",
+        "stock": 90
+    },
+    {
+        "nombre": "Smartphone 128GB",
+        "precio": 299.99,
+        "categoria": "Electrónica",
+        "descripcion": "Teléfono inteligente con cámara de alta resolución.",
+        "stock": 45
+    },
+    {
+        "nombre": "Botella Térmica",
+        "precio": 12.99,
+        "categoria": "Hogar",
+        "descripcion": "Botella de acero inoxidable que mantiene la temperatura.",
+        "stock": 150
+    },
+    {
+        "nombre": "Cargador Inalámbrico",
+        "precio": 15.99,
+        "categoria": "Electrónica",
+        "descripcion": "Cargador rápido compatible con varios dispositivos.",
+        "stock": 70
+    },
+    {
+        "nombre": "Juego de Toallas",
+        "precio": 24.99,
+        "categoria": "Hogar",
+        "descripcion": "Juego de toallas de algodón de alta calidad.",
+        "stock": 50
+    },
+    {
+        "nombre": "Teclado Mecánico",
+        "precio": 49.99,
+        "categoria": "Electrónica",
+        "descripcion": "Teclado retroiluminado con switches mecánicos.",
+        "stock": 55
+    },
+    {
+        "nombre": "Mochila Escolar",
+        "precio": 27.99,
+        "categoria": "Accesorios",
+        "descripcion": "Mochila resistente con varios compartimentos.",
+        "stock": 85
+    },
+    {
+        "nombre": "Cámara de Seguridad",
+        "precio": 59.99,
+        "categoria": "Electrónica",
+        "descripcion": "Cámara con visión nocturna y detección de movimiento.",
+        "stock": 35
+    },
+    {
+        "nombre": "Planta Decorativa",
+        "precio": 9.99,
+        "categoria": "Hogar",
+        "descripcion": "Planta artificial que aporta frescura al hogar.",
+        "stock": 100
+    },
+    {
+        "nombre": "Sudadera con Capucha",
+        "precio": 29.99,
+        "categoria": "Ropa",
+        "descripcion": "Sudadera suave y cómoda para el invierno.",
+        "stock": 60
+    },
+    {
+        "nombre": "Mouse Inalámbrico",
+        "precio": 11.99,
+        "categoria": "Electrónica",
+        "descripcion": "Mouse ergonómico con conexión inalámbrica.",
+        "stock": 90
+    },
+    {
+        "nombre": "Juguete Educativo",
+        "precio": 19.99,
+        "categoria": "Juguetes",
+        "descripcion": "Juego de bloques para estimular la creatividad.",
+        "stock": 80
+    },
+    {
+        "nombre": "Funda para Laptop",
+        "precio": 14.99,
+        "categoria": "Accesorios",
+        "descripcion": "Funda acolchada para proteger laptops de hasta 15 pulgadas.",
+        "stock": 100
+    },
+    {
+        "nombre": "Zapatillas de Casa",
+        "precio": 9.99,
+        "categoria": "Calzado",
+        "descripcion": "Zapatillas cómodas para usar en casa.",
+        "stock": 120
+    },
+    {
+        "nombre": "Termómetro Digital",
+        "precio": 8.99,
+        "categoria": "Salud",
+        "descripcion": "Termómetro digital de lectura rápida.",
+        "stock": 70
+    },
+    {
+        "nombre": "Colchón Ortopédico",
+        "precio": 199.99,
+        "categoria": "Muebles",
+        "descripcion": "Colchón con soporte ortopédico para un mejor descanso.",
+        "stock": 20
+    },
+    {
+        "nombre": "Lámpara de Escritorio",
+        "precio": 17.99,
+        "categoria": "Hogar",
+        "descripcion": "Lámpara LED ajustable con varios niveles de luz.",
+        "stock": 75
+    },
+    {
+        "nombre": "Cinturón de Cuero",
+        "precio": 12.99,
+        "categoria": "Accesorios",
+        "descripcion": "Cinturón de cuero genuino para hombre.",
+        "stock": 60
+    },
+    {
+        "nombre": "Parlante Bluetooth",
+        "precio": 25.99,
+        "categoria": "Electrónica",
+        "descripcion": "Parlante portátil con sonido estéreo.",
+        "stock": 85
+    },
+    {
+        "nombre": "Juego de Sábanas",
+        "precio": 32.99,
+        "categoria": "Hogar",
+        "descripcion": "Juego de sábanas suaves para cama doble.",
+        "stock": 45
+    },
+    {
+        "nombre": "Bicicleta de Montaña",
+        "precio": 299.99,
+        "categoria": "Deportes",
+        "descripcion": "Bicicleta resistente para rutas de montaña.",
+        "stock": 10
+    },
+    {
+        "nombre": "Cepillo de Dientes Eléctrico",
+        "precio": 21.99,
+        "categoria": "Salud",
+        "descripcion": "Cepillo de dientes eléctrico con temporizador.",
+        "stock": 40
+    },
+    {
+        "nombre": "Alfombra Decorativa",
+        "precio": 54.99,
+        "categoria": "Hogar",
+        "descripcion": "Alfombra suave y decorativa para el salón.",
+        "stock": 35
+    },
+    {
+        "nombre": "Chaqueta Impermeable",
+        "precio": 39.99,
+        "categoria": "Ropa",
+        "descripcion": "Chaqueta para protegerse de la lluvia y el viento.",
+        "stock": 55
+    },
+    {
+        "nombre": "Juego de Ollas",
+        "precio": 74.99,
+        "categoria": "Hogar",
+        "descripcion": "Set de ollas antiadherentes de varios tamaños.",
+        "stock": 20
+    },
+    {
+        "nombre": "Patinete Eléctrico",
+        "precio": 299.99,
+        "categoria": "Transporte",
+        "descripcion": "Patinete plegable con motor eléctrico.",
+        "stock": 15
+    },
+    {
+        "nombre": "Perfume Unisex",
+        "precio": 45.99,
+        "categoria": "Cuidado Personal",
+        "descripcion": "Fragancia fresca y duradera para todo el día.",
+        "stock": 50
+    },
+    {
+        "nombre": "Camiseta Deportiva",
+        "precio": 17.99,
+        "categoria": "Ropa",
+        "descripcion": "Camiseta de poliéster transpirable para entrenamiento.",
+        "stock": 90
+    },
+    {
+        "nombre": "Lente de Cámara",
+        "precio": 129.99,
+        "categoria": "Fotografía",
+        "descripcion": "Lente con zoom óptico para cámaras DSLR.",
+        "stock": 25
+    },
+    {
+        "nombre": "Sombrilla Plegable",
+        "precio": 9.99,
+        "categoria": "Accesorios",
+        "descripcion": "Sombrilla resistente al viento, fácil de llevar.",
+        "stock": 75
+    },
+    {
+        "nombre": "Set de Destornilladores",
+        "precio": 14.99,
+        "categoria": "Herramientas",
+        "descripcion": "Juego de destornilladores de precisión.",
+        "stock": 110
+    },
+    {
+        "nombre": "Toalla de Playa",
+        "precio": 19.99,
+        "categoria": "Hogar",
+        "descripcion": "Toalla grande y suave ideal para la playa.",
+        "stock": 80
+    },
+    {
+        "nombre": "Drone con Cámara",
+        "precio": 199.99,
+        "categoria": "Electrónica",
+        "descripcion": "Drone con cámara HD y control remoto.",
+        "stock": 15
+    },
+    {
+        "nombre": "Juego de Cubos Rubik",
+        "precio": 12.99,
+        "categoria": "Juguetes",
+        "descripcion": "Set de cubos Rubik de diferentes tamaños.",
+        "stock": 60
+    },
+    {
+        "nombre": "Casco de Bicicleta",
+        "precio": 29.99,
+        "categoria": "Deportes",
+        "descripcion": "Casco ligero y seguro para ciclistas.",
+        "stock": 50
+    },
+    {
+        "nombre": "Gorro de Invierno",
+        "precio": 8.99,
+        "categoria": "Accesorios",
+        "descripcion": "Gorro de lana suave y cálido.",
+        "stock": 100
+    },
+    {
+        "nombre": "Rascador para Gatos",
+        "precio": 34.99,
+        "categoria": "Mascotas",
+        "descripcion": "Rascador con diseño para gatos de interior.",
+        "stock": 25
+    },
+    {
+        "nombre": "Pulsera Fitness",
+        "precio": 19.99,
+        "categoria": "Electrónica",
+        "descripcion": "Pulsera para monitorear actividad física y sueño.",
+        "stock": 60
+    },
+    {
+        "nombre": "Rodillo de Pintura",
+        "precio": 10.99,
+        "categoria": "Herramientas",
+        "descripcion": "Rodillo de alta calidad para pintar paredes.",
+        "stock": 90
+    }
+]
