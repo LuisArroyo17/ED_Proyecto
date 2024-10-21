@@ -1,338 +1,625 @@
-[
-    {
-        "nombre": "Camiseta Básica",
-        "precio": 12.99,
-        "categoria": "Ropa",
-        "descripcion": "Camiseta de algodón 100% en varios colores.",
-        "stock": 150
+{
+    "info": {
+        "name": "ImportacionProductos",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
-    {
-        "nombre": "Zapatillas Deportivas",
-        "precio": 59.99,
-        "categoria": "Calzado",
-        "descripcion": "Zapatillas ligeras y cómodas para correr.",
-        "stock": 80
-    },
-    {
-        "nombre": "Auriculares Inalámbricos",
-        "precio": 29.99,
-        "categoria": "Electrónica",
-        "descripcion": "Auriculares con Bluetooth y cancelación de ruido.",
-        "stock": 120
-    },
-    {
-        "nombre": "Reloj Inteligente",
-        "precio": 79.99,
-        "categoria": "Electrónica",
-        "descripcion": "Reloj con múltiples funciones de monitoreo de salud.",
-        "stock": 50
-    },
-    {
-        "nombre": "Silla de Oficina",
-        "precio": 89.99,
-        "categoria": "Muebles",
-        "descripcion": "Silla ergonómica con soporte lumbar ajustable.",
-        "stock": 30
-    },
-    {
-        "nombre": "Laptop 14 pulgadas",
-        "precio": 499.99,
-        "categoria": "Electrónica",
-        "descripcion": "Laptop ligera con procesador Intel Core i5.",
-        "stock": 25
-    },
-    {
-        "nombre": "Mesa de Centro",
-        "precio": 45.99,
-        "categoria": "Muebles",
-        "descripcion": "Mesa de centro de madera con diseño moderno.",
-        "stock": 40
-    },
-    {
-        "nombre": "Bolso de Mano",
-        "precio": 22.99,
-        "categoria": "Accesorios",
-        "descripcion": "Bolso elegante de cuero sintético.",
-        "stock": 60
-    },
-    {
-        "nombre": "Set de Cubiertos",
-        "precio": 14.99,
-        "categoria": "Hogar",
-        "descripcion": "Set de cubiertos de acero inoxidable para 6 personas.",
-        "stock": 100
-    },
-    {
-        "nombre": "Gafas de Sol",
-        "precio": 19.99,
-        "categoria": "Accesorios",
-        "descripcion": "Gafas de sol polarizadas con protección UV.",
-        "stock": 90
-    },
-    {
-        "nombre": "Smartphone 128GB",
-        "precio": 299.99,
-        "categoria": "Electrónica",
-        "descripcion": "Teléfono inteligente con cámara de alta resolución.",
-        "stock": 45
-    },
-    {
-        "nombre": "Botella Térmica",
-        "precio": 12.99,
-        "categoria": "Hogar",
-        "descripcion": "Botella de acero inoxidable que mantiene la temperatura.",
-        "stock": 150
-    },
-    {
-        "nombre": "Cargador Inalámbrico",
-        "precio": 15.99,
-        "categoria": "Electrónica",
-        "descripcion": "Cargador rápido compatible con varios dispositivos.",
-        "stock": 70
-    },
-    {
-        "nombre": "Juego de Toallas",
-        "precio": 24.99,
-        "categoria": "Hogar",
-        "descripcion": "Juego de toallas de algodón de alta calidad.",
-        "stock": 50
-    },
-    {
-        "nombre": "Teclado Mecánico",
-        "precio": 49.99,
-        "categoria": "Electrónica",
-        "descripcion": "Teclado retroiluminado con switches mecánicos.",
-        "stock": 55
-    },
-    {
-        "nombre": "Mochila Escolar",
-        "precio": 27.99,
-        "categoria": "Accesorios",
-        "descripcion": "Mochila resistente con varios compartimentos.",
-        "stock": 85
-    },
-    {
-        "nombre": "Cámara de Seguridad",
-        "precio": 59.99,
-        "categoria": "Electrónica",
-        "descripcion": "Cámara con visión nocturna y detección de movimiento.",
-        "stock": 35
-    },
-    {
-        "nombre": "Planta Decorativa",
-        "precio": 9.99,
-        "categoria": "Hogar",
-        "descripcion": "Planta artificial que aporta frescura al hogar.",
-        "stock": 100
-    },
-    {
-        "nombre": "Sudadera con Capucha",
-        "precio": 29.99,
-        "categoria": "Ropa",
-        "descripcion": "Sudadera suave y cómoda para el invierno.",
-        "stock": 60
-    },
-    {
-        "nombre": "Mouse Inalámbrico",
-        "precio": 11.99,
-        "categoria": "Electrónica",
-        "descripcion": "Mouse ergonómico con conexión inalámbrica.",
-        "stock": 90
-    },
-    {
-        "nombre": "Juguete Educativo",
-        "precio": 19.99,
-        "categoria": "Juguetes",
-        "descripcion": "Juego de bloques para estimular la creatividad.",
-        "stock": 80
-    },
-    {
-        "nombre": "Funda para Laptop",
-        "precio": 14.99,
-        "categoria": "Accesorios",
-        "descripcion": "Funda acolchada para proteger laptops de hasta 15 pulgadas.",
-        "stock": 100
-    },
-    {
-        "nombre": "Zapatillas de Casa",
-        "precio": 9.99,
-        "categoria": "Calzado",
-        "descripcion": "Zapatillas cómodas para usar en casa.",
-        "stock": 120
-    },
-    {
-        "nombre": "Termómetro Digital",
-        "precio": 8.99,
-        "categoria": "Salud",
-        "descripcion": "Termómetro digital de lectura rápida.",
-        "stock": 70
-    },
-    {
-        "nombre": "Colchón Ortopédico",
-        "precio": 199.99,
-        "categoria": "Muebles",
-        "descripcion": "Colchón con soporte ortopédico para un mejor descanso.",
-        "stock": 20
-    },
-    {
-        "nombre": "Lámpara de Escritorio",
-        "precio": 17.99,
-        "categoria": "Hogar",
-        "descripcion": "Lámpara LED ajustable con varios niveles de luz.",
-        "stock": 75
-    },
-    {
-        "nombre": "Cinturón de Cuero",
-        "precio": 12.99,
-        "categoria": "Accesorios",
-        "descripcion": "Cinturón de cuero genuino para hombre.",
-        "stock": 60
-    },
-    {
-        "nombre": "Parlante Bluetooth",
-        "precio": 25.99,
-        "categoria": "Electrónica",
-        "descripcion": "Parlante portátil con sonido estéreo.",
-        "stock": 85
-    },
-    {
-        "nombre": "Juego de Sábanas",
-        "precio": 32.99,
-        "categoria": "Hogar",
-        "descripcion": "Juego de sábanas suaves para cama doble.",
-        "stock": 45
-    },
-    {
-        "nombre": "Bicicleta de Montaña",
-        "precio": 299.99,
-        "categoria": "Deportes",
-        "descripcion": "Bicicleta resistente para rutas de montaña.",
-        "stock": 10
-    },
-    {
-        "nombre": "Cepillo de Dientes Eléctrico",
-        "precio": 21.99,
-        "categoria": "Salud",
-        "descripcion": "Cepillo de dientes eléctrico con temporizador.",
-        "stock": 40
-    },
-    {
-        "nombre": "Alfombra Decorativa",
-        "precio": 54.99,
-        "categoria": "Hogar",
-        "descripcion": "Alfombra suave y decorativa para el salón.",
-        "stock": 35
-    },
-    {
-        "nombre": "Chaqueta Impermeable",
-        "precio": 39.99,
-        "categoria": "Ropa",
-        "descripcion": "Chaqueta para protegerse de la lluvia y el viento.",
-        "stock": 55
-    },
-    {
-        "nombre": "Juego de Ollas",
-        "precio": 74.99,
-        "categoria": "Hogar",
-        "descripcion": "Set de ollas antiadherentes de varios tamaños.",
-        "stock": 20
-    },
-    {
-        "nombre": "Patinete Eléctrico",
-        "precio": 299.99,
-        "categoria": "Transporte",
-        "descripcion": "Patinete plegable con motor eléctrico.",
-        "stock": 15
-    },
-    {
-        "nombre": "Perfume Unisex",
-        "precio": 45.99,
-        "categoria": "Cuidado Personal",
-        "descripcion": "Fragancia fresca y duradera para todo el día.",
-        "stock": 50
-    },
-    {
-        "nombre": "Camiseta Deportiva",
-        "precio": 17.99,
-        "categoria": "Ropa",
-        "descripcion": "Camiseta de poliéster transpirable para entrenamiento.",
-        "stock": 90
-    },
-    {
-        "nombre": "Lente de Cámara",
-        "precio": 129.99,
-        "categoria": "Fotografía",
-        "descripcion": "Lente con zoom óptico para cámaras DSLR.",
-        "stock": 25
-    },
-    {
-        "nombre": "Sombrilla Plegable",
-        "precio": 9.99,
-        "categoria": "Accesorios",
-        "descripcion": "Sombrilla resistente al viento, fácil de llevar.",
-        "stock": 75
-    },
-    {
-        "nombre": "Set de Destornilladores",
-        "precio": 14.99,
-        "categoria": "Herramientas",
-        "descripcion": "Juego de destornilladores de precisión.",
-        "stock": 110
-    },
-    {
-        "nombre": "Toalla de Playa",
-        "precio": 19.99,
-        "categoria": "Hogar",
-        "descripcion": "Toalla grande y suave ideal para la playa.",
-        "stock": 80
-    },
-    {
-        "nombre": "Drone con Cámara",
-        "precio": 199.99,
-        "categoria": "Electrónica",
-        "descripcion": "Drone con cámara HD y control remoto.",
-        "stock": 15
-    },
-    {
-        "nombre": "Juego de Cubos Rubik",
-        "precio": 12.99,
-        "categoria": "Juguetes",
-        "descripcion": "Set de cubos Rubik de diferentes tamaños.",
-        "stock": 60
-    },
-    {
-        "nombre": "Casco de Bicicleta",
-        "precio": 29.99,
-        "categoria": "Deportes",
-        "descripcion": "Casco ligero y seguro para ciclistas.",
-        "stock": 50
-    },
-    {
-        "nombre": "Gorro de Invierno",
-        "precio": 8.99,
-        "categoria": "Accesorios",
-        "descripcion": "Gorro de lana suave y cálido.",
-        "stock": 100
-    },
-    {
-        "nombre": "Rascador para Gatos",
-        "precio": 34.99,
-        "categoria": "Mascotas",
-        "descripcion": "Rascador con diseño para gatos de interior.",
-        "stock": 25
-    },
-    {
-        "nombre": "Pulsera Fitness",
-        "precio": 19.99,
-        "categoria": "Electrónica",
-        "descripcion": "Pulsera para monitorear actividad física y sueño.",
-        "stock": 60
-    },
-    {
-        "nombre": "Rodillo de Pintura",
-        "precio": 10.99,
-        "categoria": "Herramientas",
-        "descripcion": "Rodillo de alta calidad para pintar paredes.",
-        "stock": 90
-    }
-]
+    "item": [
+        {
+            "name": "Crear Producto 1",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Camiseta Básica\",\n    \"precio\": 12.99,\n    \"categoria\": \"Ropa\",\n    \"descripcion\": \"Camiseta de algodón 100% en varios colores.\",\n    \"stock\": 150\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 2",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Zapatillas Deportivas\",\n    \"precio\": 59.99,\n    \"categoria\": \"Calzado\",\n    \"descripcion\": \"Zapatillas ligeras y cómodas para correr.\",\n    \"stock\": 80\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 3",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Auriculares Inalámbricos\",\n    \"precio\": 29.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Auriculares con Bluetooth y cancelación de ruido.\",\n    \"stock\": 120\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 4",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Reloj Inteligente\",\n    \"precio\": 79.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Reloj con múltiples funciones de monitoreo de salud.\",\n    \"stock\": 50\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 5",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Silla de Oficina\",\n    \"precio\": 89.99,\n    \"categoria\": \"Muebles\",\n    \"descripcion\": \"Silla ergonómica con soporte lumbar ajustable.\",\n    \"stock\": 30\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 6",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Laptop 14 pulgadas\",\n    \"precio\": 499.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Laptop ligera con procesador Intel Core i5.\",\n    \"stock\": 25\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 7",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Mesa de Centro\",\n    \"precio\": 45.99,\n    \"categoria\": \"Muebles\",\n    \"descripcion\": \"Mesa de centro de madera con diseño moderno.\",\n    \"stock\": 40\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 8",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Bolso de Mano\",\n    \"precio\": 22.99,\n    \"categoria\": \"Accesorios\",\n    \"descripcion\": \"Bolso elegante de cuero sintético.\",\n    \"stock\": 60\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 9",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Set de Cubiertos\",\n    \"precio\": 14.99,\n    \"categoria\": \"Hogar\",\n    \"descripcion\": \"Set de cubiertos de acero inoxidable para 6 personas.\",\n    \"stock\": 100\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 10",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Gafas de Sol\",\n    \"precio\": 19.99,\n    \"categoria\": \"Accesorios\",\n    \"descripcion\": \"Gafas de sol polarizadas con protección UV.\",\n    \"stock\": 90\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 11",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Smartphone 128GB\",\n    \"precio\": 299.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Teléfono inteligente con cámara de alta resolución.\",\n    \"stock\": 45\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 12",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Botella Térmica\",\n    \"precio\": 12.99,\n    \"categoria\": \"Hogar\",\n    \"descripcion\": \"Botella de acero inoxidable que mantiene la temperatura.\",\n    \"stock\": 150\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 13",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Cargador Inalámbrico\",\n    \"precio\": 15.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Cargador rápido compatible con varios dispositivos.\",\n    \"stock\": 70\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 14",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Juego de Toallas\",\n    \"precio\": 24.99,\n    \"categoria\": \"Hogar\",\n    \"descripcion\": \"Juego de toallas de algodón de alta calidad.\",\n    \"stock\": 50\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 15",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Teclado Mecánico\",\n    \"precio\": 49.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Teclado retroiluminado con switches mecánicos.\",\n    \"stock\": 55\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 16",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Mochila Escolar\",\n    \"precio\": 27.99,\n    \"categoria\": \"Accesorios\",\n    \"descripcion\": \"Mochila resistente con varios compartimentos.\",\n    \"stock\": 85\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 17",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Cámara de Seguridad\",\n    \"precio\": 59.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Cámara con visión nocturna y detección de movimiento.\",\n    \"stock\": 35\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 18",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Planta Decorativa\",\n    \"precio\": 9.99,\n    \"categoria\": \"Hogar\",\n    \"descripcion\": \"Planta artificial que aporta frescura al hogar.\",\n    \"stock\": 100\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 19",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Sudadera con Capucha\",\n    \"precio\": 29.99,\n    \"categoria\": \"Ropa\",\n    \"descripcion\": \"Sudadera suave y cómoda para el invierno.\",\n    \"stock\": 60\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 20",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Mouse Inalámbrico\",\n    \"precio\": 11.99,\n    \"categoria\": \"Electrónica\",\n    \"descripcion\": \"Mouse ergonómico con conexión inalámbrica.\",\n    \"stock\": 90\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 21",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Juguete Educativo\",\n    \"precio\": 19.99,\n    \"categoria\": \"Juguetes\",\n    \"descripcion\": \"Juego de bloques para estimular la creatividad.\",\n    \"stock\": 80\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Crear Producto 22",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"nombre\": \"Funda para Laptop\",\n    \"precio\": 14.99,\n    \"categoria\": \"Accesorios\",\n    \"descripcion\": \"Funda acolchada para proteger laptops de hasta 15 pulgadas.\",\n    \"stock\": 100\n}"
+                },
+                "url": {
+                    "raw": "http://127.0.0.1:5000/productos",
+                    "protocol": "http",
+                    "host": [
+                        "127.0.0.1"
+                    ],
+                    "port": "5000",
+                    "path": [
+                        "productos"
+                    ]
+                }
+            },
+            "response": []
+        }
+        
+    ]
+}
