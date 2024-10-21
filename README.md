@@ -12,7 +12,7 @@
 ```bash
   pip install -r requirements.txt
 ```
-- Ejecutar en mysql CREATE DATABASE \<ed-db\> 
+- Ejecutar en mysql CREATE DATABASE 'ed-db';
 - RUN
 ```bash
   python src/utils/creartablas.py
