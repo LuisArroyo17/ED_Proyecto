@@ -12,8 +12,7 @@
 ```bash
   pip install -r requirements.txt
 ```
-- Crear el archivo .envvars según .envvarsexample
-- Para DATABASE_NAME ejecutar en mysql CREATE DATABASE \<ed-db\> y usar ese nombre
+- Ejecutar en mysql CREATE DATABASE \<ed-db\> 
 - RUN
 ```bash
   python src/utils/creartablas.py
