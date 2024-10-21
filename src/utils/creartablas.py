@@ -20,10 +20,10 @@ class DB:
 
     def connection(self):
         db = pymysql.connections.Connection(
-            host="localhost",#os.getenv("DB_HOST"),
-            user="root",#os.getenv("DB_USER"),
-            password="77063414",#os.getenv("DB_PASSWORD"),
-            database="ed-db",#os.getenv("DB_NAME"),
+            host="localhost",
+            user="root",
+            password="77063414",
+            database="ed-db",
             cursorclass=pymysql.cursors.DictCursor
         )
         print("Conexión exitosa")

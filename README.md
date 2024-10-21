@@ -16,7 +16,7 @@
 - Para DATABASE_NAME ejecutar en mysql CREATE DATABASE \<ed-db\> y usar ese nombre
 - RUN
 ```bash
-  python src/utils/creartablasDB.py
+  python src/utils/creartablas.py
 ```
 - Ejecutar el proyecto
 ```bash
