@@ -1,4 +1,4 @@
-# models/productos.py
+# models/ModelProductos.py
 from utils.db import get_connection  # Usamos get_connection en lugar de DB
 
 class ModelProducto:
@@ -69,13 +69,34 @@ class ModelProducto:
     #     productos = cursor.fetchall()
     #     return {"data": productos}, 200  # Devuelve productos en un formato consistente
 
-    def obtener_productos(self, offset=0, limit=10, categoria=None):
+    # limitado a 10(error)
+    # def obtener_productos(self, offset=0, limit=10, categoria=None):
+    #     cursor = self.db.cursor()
+    #     if categoria:
+    #         query = "SELECT * FROM productos WHERE categoria = %s LIMIT %s OFFSET %s"
+    #         cursor.execute(query, (categoria, limit, offset))
+    #     else:
+    #         query = "SELECT * FROM productos LIMIT %s OFFSET %s"
+    #         cursor.execute(query, (limit, offset))
+    #     productos = cursor.fetchall()
+    #     return productos  # Asegúrate de que este resultado es lo que necesitas
+
+    def obtener_productos(self, offset=None, limit=None, categoria=None):
         cursor = self.db.cursor()
+        
+        # Construye la consulta SQL
         if categoria:
-            query = "SELECT * FROM productos WHERE categoria = %s LIMIT %s OFFSET %s"
-            cursor.execute(query, (categoria, limit, offset))
+            query = "SELECT * FROM productos WHERE categoria = %s"
+            params = (categoria,)
         else:
-            query = "SELECT * FROM productos LIMIT %s OFFSET %s"
-            cursor.execute(query, (limit, offset))
+            query = "SELECT * FROM productos"
+            params = ()
+        
+        # Aplica límites de paginación si se proporcionan
+        if limit is not None and offset is not None:
+            query += " LIMIT %s OFFSET %s"
+            params += (limit, offset)
+
+        cursor.execute(query, params)
         productos = cursor.fetchall()
-        return productos  # Asegúrate de que este resultado es lo que necesitas
+        return productos

@@ -22,7 +22,20 @@ def actualizar_producto1(id):
 def eliminar_producto1(id):
     return ProductosController().eliminar_producto(id)
 
-# Nuevo endpoint para listar productos con paginación y filtro por categoría
+# # Nuevo endpoint para listar productos con paginación y filtro por categoría
+# @productos_blueprint.route('/productos', methods=['GET'])
+# def listar_productos():
+#     # Obtener parámetros de la URL para paginación y filtro
+#     page = request.args.get('page', 1, type=int)      # Página actual
+#     limit = request.args.get('limit', 10, type=int)    # Número de productos por página
+#     categoria = request.args.get('categoria', None)    # Filtro opcional por categoría
+
+#     # Llamar al método del controlador para obtener los productos
+#     productos = ProductosController().listar_productos(page, limit, categoria)
+    
+#     # Retornar directamente la respuesta JSON
+#     return productos  # Ya debe ser una respuesta JSON en el controlador
+
 @productos_blueprint.route('/productos', methods=['GET'])
 def listar_productos():
     # Obtener parámetros de la URL para paginación y filtro
@@ -30,11 +43,11 @@ def listar_productos():
     limit = request.args.get('limit', 10, type=int)    # Número de productos por página
     categoria = request.args.get('categoria', None)    # Filtro opcional por categoría
 
-    # Llamar al método del controlador para obtener los productos
-    productos = ProductosController().listar_productos(page, limit, categoria)
+    # Llamar al método del controlador para obtener los productos desde la memoria
+    productos = productos_controller.listar_productos(page, limit, categoria)
     
     # Retornar directamente la respuesta JSON
-    return productos  # Ya debe ser una respuesta JSON en el controlador
+    return jsonify(productos)
 
 @productos_blueprint.route('/productos/buscar', methods=['GET'])
 def buscar_producto_por_nombre():

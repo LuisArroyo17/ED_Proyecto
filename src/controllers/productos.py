@@ -42,6 +42,10 @@ class ProductosController:
             self.productos_lista.append(producto)
             self.productos_dict[producto["id"]] = producto
             self.arbol_productos.insertar(producto)  # Insertar en el árbol BST
+
+         # Verificar la cantidad de productos en las estructuras en memoria
+        # print("Productos en productos_lista:", len(self.productos_lista))
+        # print("Productos en productos_dict:", len(self.productos_dict))
     # Métodos CRUD utilizando tanto la base de datos como las estructuras en memoria
     def buscar_producto_por_nombre(self, nombre):
         """
@@ -125,8 +129,33 @@ class ProductosController:
 
         return resultado
 
+    # def listar_productos(self, page=1, limit=10, categoria=None):
+    # # Calcula el offset en función de la página y el límite
+    #     offset = (page - 1) * limit
+    #     productos = ModelProducto().obtener_productos(offset=offset, limit=limit, categoria=categoria)
+    #     return {"data": productos}
     def listar_productos(self, page=1, limit=10, categoria=None):
-    # Calcula el offset en función de la página y el límite
+        # Recargar productos en memoria desde la base de datos
+        self.cargar_productos_en_memoria()
+
+        # Verificar la cantidad de productos cargados en memoria
+        # print("Total productos en memoria:", len(self.productos_lista))
+
+        # Aplicar filtro por categoría si es necesario
+        if categoria:
+            productos_filtrados = [p for p in self.productos_lista if p["categoria"] == categoria]
+        else:
+            productos_filtrados = self.productos_lista
+
+        # Verificar productos filtrados por categoría (si aplica)
+        # print("Productos filtrados:", len(productos_filtrados))
+
+        # Paginación
         offset = (page - 1) * limit
-        productos = ModelProducto().obtener_productos(offset=offset, limit=limit, categoria=categoria)
-        return {"data": productos}
+        productos_paginados = productos_filtrados[offset:offset + limit]
+
+        # Verificar productos paginados para la página solicitada
+        # print("Productos en página", page, ":", productos_paginados)
+
+        # Retornar los productos paginados
+        return {"data": productos_paginados}
