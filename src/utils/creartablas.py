@@ -1,36 +1,22 @@
-import pymysql
-import pymysql.cursors
-from dotenv import load_dotenv
-
-
+# utils/creartablas.py
+from utils.db import get_connection
 
 class DB:
     def __init__(self):
-        db= self.connection()
+        db = get_connection()
         try:
             cursor = db.cursor()
             cursor.execute("SHOW TABLES;")
             db_tables = cursor.fetchall()
-            if (db_tables.__len__() > 0):
+            if len(db_tables) > 0:
                 print("Tablas ya existen")
             else:
                 self.crear_tablas()
         except Exception as e:
             print(f"Error {e}")
 
-    def connection(self):
-        db = pymysql.connections.Connection(
-            host="localhost",
-            user="root",
-            password="77063414",
-            database="ed-db",
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("Conexión exitosa")
-        return db
-
     def crear_tablas(self):
-        db = self.connection()
+        db = get_connection()
         try:
             cursor = db.cursor()
             
@@ -100,4 +86,6 @@ class DB:
             print(f"Error {e}")
         finally:
             db.close()
-db= DB()
+
+# Instancia para crear las tablas
+db = DB()

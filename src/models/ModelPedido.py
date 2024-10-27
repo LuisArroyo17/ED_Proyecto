@@ -1,12 +1,13 @@
-from utils.creartablas import DB
+from utils.db import get_connection  # Importa get_connection en lugar de DB
 
 class ModelPedido:
     def __init__(self):
-        self.db = DB().connection()
+        self.db = get_connection()  # Usa get_connection() directamente
 
     def __del__(self):
         if self.db:
             self.db.close()
+
     def agregar_pedidoDB(self, usuario_id, total, estado):
         cursor = self.db.cursor()
         try:
