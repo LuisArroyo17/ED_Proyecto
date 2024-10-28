@@ -129,33 +129,34 @@ class ProductosController:
 
         return resultado
 
-    # def listar_productos(self, page=1, limit=10, categoria=None):
-    # # Calcula el offset en función de la página y el límite
-    #     offset = (page - 1) * limit
-    #     productos = ModelProducto().obtener_productos(offset=offset, limit=limit, categoria=categoria)
-    #     return {"data": productos}
     def listar_productos(self, page=1, limit=10, categoria=None):
-        # Recargar productos en memoria desde la base de datos
-        self.cargar_productos_en_memoria()
+        # print(f"Listando productos - Página: {page}, Límite: {limit}, Categoría: {categoria}")
+         # Calcula el offset basado en el número de página y el límite
+        offset = (page - 1) * limit if page and limit else None
+        productos = ModelProducto().obtener_productos(offset=offset, limit=limit, categoria=categoria)
+        return {"data": productos if productos else []}
+    # def listar_productos(self, page=1, limit=10, categoria=None):
+    #     # Recargar productos en memoria desde la base de datos
+    #     self.cargar_productos_en_memoria()
 
-        # Verificar la cantidad de productos cargados en memoria
-        # print("Total productos en memoria:", len(self.productos_lista))
+    #     # Verificar la cantidad de productos cargados en memoria
+    #     # print("Total productos en memoria:", len(self.productos_lista))
 
-        # Aplicar filtro por categoría si es necesario
-        if categoria:
-            productos_filtrados = [p for p in self.productos_lista if p["categoria"] == categoria]
-        else:
-            productos_filtrados = self.productos_lista
+    #     # Aplicar filtro por categoría si es necesario
+    #     if categoria:
+    #         productos_filtrados = [p for p in self.productos_lista if p["categoria"] == categoria]
+    #     else:
+    #         productos_filtrados = self.productos_lista
 
-        # Verificar productos filtrados por categoría (si aplica)
-        # print("Productos filtrados:", len(productos_filtrados))
+    #     # Verificar productos filtrados por categoría (si aplica)
+    #     # print("Productos filtrados:", len(productos_filtrados))
 
-        # Paginación
-        offset = (page - 1) * limit
-        productos_paginados = productos_filtrados[offset:offset + limit]
+    #     # Paginación
+    #     offset = (page - 1) * limit
+    #     productos_paginados = productos_filtrados[offset:offset + limit]
 
-        # Verificar productos paginados para la página solicitada
-        # print("Productos en página", page, ":", productos_paginados)
+    #     # Verificar productos paginados para la página solicitada
+    #     # print("Productos en página", page, ":", productos_paginados)
 
-        # Retornar los productos paginados
-        return {"data": productos_paginados}
+    #     # Retornar los productos paginados
+    #     return {"data": productos_paginados}

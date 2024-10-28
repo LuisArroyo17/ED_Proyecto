@@ -40,6 +40,7 @@ class ArbolProductoBST:
     def _buscar_recursivo(self, nodo_actual, nombre):
         if nodo_actual is None:
             return None
+        # print(f"Visitando nodo: {nodo_actual.producto['nombre']}")  # Debug
         if nombre == nodo_actual.producto["nombre"]:
             return nodo_actual.producto
         elif nombre < nodo_actual.producto["nombre"]:
