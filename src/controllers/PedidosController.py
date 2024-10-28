@@ -7,7 +7,25 @@ class PedidosController:
     def __init__(self):
         # Inicializamos una cola en memoria para gestionar los pedidos en FIFO
         self.pedidos_cola = deque()
+    def cargar_todos_pedidos_desde_db(self):
+        self.pedidos_cola.clear()
+        # Llamar a obtener_todos_pedidos para cargar todos los pedidos desde la base de datos
+        pedidos, status_code = ModelPedido().obtener_todos_pedidos()
         
+        if status_code == 200:
+            for pedido in pedidos:
+                # Convertir cada pedido a un diccionario con datos JSON-compatibles
+                pedido_dict = {
+                    "pedido_id": pedido["id"],
+                    "usuario_id": pedido["usuario_id"],
+                    "fecha": str(pedido["fecha"]),  # Convertir datetime a string
+                    "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"],  # Convertir Decimal a float
+                    "estado": pedido["estado"]
+                }
+                # Agregar el pedido a la cola en memoria si no está duplicado
+                if not any(p["pedido_id"] == pedido_dict["pedido_id"] for p in self.pedidos_cola):
+                    self.pedidos_cola.append(pedido_dict)
+                        
     def cargar_pedidos_desde_db(self):
         # Llamar a obtener_pedidos_pendientes para cargar pedidos pendientes de la base de datos
         pedidos, status_code = ModelPedido().obtener_pedidos_pendientes()
@@ -100,6 +118,7 @@ class PedidosController:
         return jsonify({"message": "Pedido no encontrado"}), 404
 
     def mostrar_pedidos(self):
+        self.pedidos_cola.clear()
         # Cargar pedidos desde la base de datos en la cola en memoria antes de mostrarlos
         self.cargar_pedidos_desde_db()
         
@@ -109,7 +128,18 @@ class PedidosController:
             return jsonify({"pedidos": pedidos_list}), 200
         else:
             return jsonify({"message": "No hay pedidos pendientes"}), 404
+    
+    def mostrar_todos_pedidos(self):
+        # Cargar todos los pedidos desde la base de datos en la cola en memoria antes de mostrarlos
+        self.cargar_todos_pedidos_desde_db()
         
+        # Convertir la cola en memoria a una lista para mostrarla en JSON
+        pedidos_list = list(self.pedidos_cola)
+        if pedidos_list:
+            return jsonify({"pedidos": pedidos_list}), 200
+        else:
+            return jsonify({"message": "No hay pedidos"}), 404
+      
     def obtener_pedido(self, id):
             pedido = ModelPedido().obtener_pedidoDB(id)
             return pedido

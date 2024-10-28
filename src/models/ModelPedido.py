@@ -7,7 +7,20 @@ class ModelPedido:
     def __del__(self):
         if self.db:
             self.db.close()
-
+    def obtener_todos_pedidos(self):
+        cursor = self.db.cursor()
+        try:
+            # Obtener todos los pedidos sin filtrar por estado
+            cursor.execute("SELECT id, usuario_id, fecha, total, estado FROM pedidos;")
+            pedidos = cursor.fetchall()  # Obtener todos los resultados como lista de tuplas o diccionarios
+            return pedidos, 200
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": "Error al obtener todos los pedidos",
+                "error": str(e)
+            }, 500
+            
     def agregar_pedidoDB(self, usuario_id, total, estado, detalles):
         cursor = self.db.cursor()
         try:

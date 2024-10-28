@@ -37,6 +37,9 @@ def actualizar_estado_pedido(pedido_id):
 def mostrar_pedidos():
     return pedidos_controller.mostrar_pedidos()
 
+@pedidos_blueprint.route('/pedidos/todos', methods=['GET'])
+def mostrar_todos_pedidos():
+    return pedidos_controller.mostrar_todos_pedidos()
 #*****************Interacción directa con la DB*****************
 
 # Ruta para obtener un pedido específico de la base de datos (GET)
