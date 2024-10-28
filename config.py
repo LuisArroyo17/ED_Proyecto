@@ -1,9 +1,8 @@
-# config.py
 import os
-import pymysql  # Agrega esta línea para importar pymysql
+import pymysql  
 from dotenv import load_dotenv
 
-load_dotenv()  # Cargar las variables de entorno desde el archivo .env
+load_dotenv()  
 
 class Config:
     DEBUG = True
@@ -12,7 +11,7 @@ class Config:
     DB_CONFIG = {
         'host': os.getenv("DATABASE_HOST", "localhost"),
         'user': os.getenv("DATABASE_USER", "root"),
-        'password': os.getenv("DATABASE_PASSWORD", "140401"),
+        'password': os.getenv("DATABASE_PASSWORD", "77063414"),
         'database': os.getenv("DATABASE_NAME", "ed-db"),
-        'cursorclass': pymysql.cursors.DictCursor  # Ahora pymysql está definido
+        'cursorclass': pymysql.cursors.DictCursor  
     }

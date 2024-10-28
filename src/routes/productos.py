@@ -1,4 +1,3 @@
-# routes/productos.py
 from flask import Blueprint, request, jsonify
 from controllers.productos import ProductosController
 
