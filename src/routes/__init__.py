@@ -8,3 +8,5 @@ def register_blueprints(app):
     app.register_blueprint(usuarios_blueprint)
     app.register_blueprint(productos_blueprint)
     app.register_blueprint(envios_blueprint)  # Registra el blueprint de envíos
+
+from routes.arbol_bst import arbol_blueprint

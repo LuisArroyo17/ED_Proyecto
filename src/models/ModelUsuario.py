@@ -1,8 +1,8 @@
-from utils.db import get_connection  # Importa get_connection en lugar de DB
+from utils.creartablas import DB
 
 class ModelUsuario:
     def __init__(self):
-        self.db = get_connection()  # Usa get_connection() directamente
+        self.db = DB().connection()
 
     def __del__(self):
         if self.db:
