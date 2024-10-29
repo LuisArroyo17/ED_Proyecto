@@ -1,5 +1,8 @@
-# utils/creartablas.py
+import pymysql
+import pymysql.cursors
+from dotenv import load_dotenv
 from utils.db import get_connection
+
 
 class DB:
     def __init__(self):
@@ -14,17 +17,6 @@ class DB:
                 self.crear_tablas()
         except Exception as e:
             print(f"Error {e}")
-
-    def connection(self):
-        db = pymysql.connections.Connection(
-            host="localhost",
-            user="root",
-            password="Rodrigo1",
-            database="ed-db",
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("Conexión exitosa")
-        return db
 
     def crear_tablas(self):
         db = get_connection()
@@ -113,6 +105,4 @@ class DB:
             print(f"Error {e}")
         finally:
             db.close()
-
-# Instancia para crear las tablas
-db = DB()
+db= DB()
