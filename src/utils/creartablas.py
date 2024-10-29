@@ -15,6 +15,17 @@ class DB:
         except Exception as e:
             print(f"Error {e}")
 
+    def connection(self):
+        db = pymysql.connections.Connection(
+            host="localhost",
+            user="root",
+            password="Rodrigo1",
+            database="ed-db",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        print("Conexión exitosa")
+        return db
+
     def crear_tablas(self):
         db = get_connection()
         try:
@@ -79,6 +90,22 @@ class DB:
                     FOREIGN KEY (producto_id) REFERENCES productos(id)
                 );
             """)
+
+
+             # Agregar esta sección en el método crear_tablas() de creartablas.py
+
+            # Crear tabla envios
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS envios (
+                    id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                    pedido_id BIGINT UNSIGNED NOT NULL,
+                    detalles TEXT,
+                    prioridad INT DEFAULT 0,
+                    estado VARCHAR(50) DEFAULT 'pendiente',
+                    FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
+                );
+            """)
+       
             
             db.commit()
             print("Tablas creadas")
