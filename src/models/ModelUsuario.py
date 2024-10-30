@@ -20,10 +20,12 @@ class ModelUsuario:
         except Exception as e:
             return {"status": "error", "message": str(e)}, 500
 
+
+
     def obtener_usuarioDB(self, id):
         cursor = self.db.cursor()
         try:
-            cursor.execute("SELECT * FROM usuarios WHERE id = %s;", (id,))
+            cursor.execute("SELECT id, nombre, email, contrasena, rol FROM usuarios WHERE id = %s;", (id,))
             usuario = cursor.fetchone()
             if usuario:
                 return {"data": usuario}, 200

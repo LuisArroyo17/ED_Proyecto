@@ -135,6 +135,7 @@ class ProductosController:
         offset = (page - 1) * limit if page and limit else None
         productos = ModelProducto().obtener_productos(offset=offset, limit=limit, categoria=categoria)
         return {"data": productos if productos else []}
+    
     # def listar_productos(self, page=1, limit=10, categoria=None):
     #     # Recargar productos en memoria desde la base de datos
     #     self.cargar_productos_en_memoria()
