@@ -49,7 +49,7 @@ class PedidosController:
                     "pedido_id": pedido["id"],
                     "usuario_id": pedido["usuario_id"],
                     "fecha": str(pedido["fecha"]),  
-                    "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"],  # Convertir Decimal a float
+                    "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"], 
                     "estado": pedido["estado"]
                 }
                 if not any(p["pedido_id"] == pedido_dict["pedido_id"] for p in self.pedidos_cola):
@@ -66,7 +66,7 @@ class PedidosController:
                     "pedido_id": pedido["id"],
                     "usuario_id": pedido["usuario_id"],
                     "fecha": str(pedido["fecha"]),  
-                    "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"],  # Convertir Decimal a float
+                    "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"], 
                     "estado": pedido["estado"]
                 }
                 
@@ -157,9 +157,6 @@ class PedidosController:
         else:
             return jsonify({"message": "No hay pedidos"}), 404
       
-    def obtener_pedido(self, id):
-            pedido = ModelPedido().obtener_pedidoDB(id)
-            return pedido
     def eliminar_pedido(self, id):
         resultado = ModelPedido().eliminar_pedidoDB(id)
         return resultado
