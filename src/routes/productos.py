@@ -21,6 +21,10 @@ def actualizar_producto1(id):
 def eliminar_producto1(id):
     return ProductosController().eliminar_producto(id)
 
+@productos_blueprint.route('/productos', methods=['GET'])
+def obtener_productos():
+    return ProductosController().obtener_productos()
+
 # # Nuevo endpoint para listar productos con paginación y filtro por categoría
 # @productos_blueprint.route('/productos', methods=['GET'])
 # def listar_productos():

@@ -160,3 +160,7 @@ class ProductosController:
 
     #     # Retornar los productos paginados
     #     return {"data": productos_paginados}
+    
+    def obtener_productos(self):
+        productos = ModelProducto().obtener_todos_productosDB()
+        return productos

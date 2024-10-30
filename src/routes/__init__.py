@@ -2,6 +2,7 @@ from routes.pedidos import pedidos_blueprint
 from routes.usuarios import usuarios_blueprint
 from routes.productos import productos_blueprint
 from routes.envios import envios_blueprint  # Agrega el blueprint de envíos
+from routes.arbol_bst import arbol_blueprint
 
 def register_blueprints(app):
     app.register_blueprint(pedidos_blueprint)

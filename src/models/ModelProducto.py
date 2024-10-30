@@ -100,3 +100,14 @@ class ModelProducto:
         cursor.execute(query, params)
         productos = cursor.fetchall()
         return productos
+    def obtener_todos_productosDB(self):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("SELECT id, nombre, precio, categoria, descripcion, stock FROM productos;")
+            productos = cursor.fetchall()
+            if productos: 
+                return {"data": productos}, 200
+            else: 
+                return {"message": "No hay productos"}, 404
+        except Exception as e:
+            return {"status": "error", "message": str(e)}, 500
