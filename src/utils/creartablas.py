@@ -35,7 +35,8 @@ class DB:
                     categoria VARCHAR(50) NOT NULL,
                     precio NUMERIC(10, 2) NOT NULL,
                     descripcion TEXT,
-                    stock INTEGER DEFAULT 0
+                    stock INTEGER DEFAULT 0,
+                    imagen VARCHAR(255)
                 );
             """)
             

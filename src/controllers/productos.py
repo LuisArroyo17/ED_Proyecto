@@ -4,7 +4,13 @@ from models.ModelProducto import ModelProducto
 from models.productos import Producto
 from decimal import Decimal
 from utils.bst import ArbolProductoBST  # Importa el BST
-
+from werkzeug.utils import secure_filename
+import os
+UPLOAD_FOLDER = 'src/static/uploads' 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 class ProductosController:
     def __init__(self):
         # Estructuras en memoria para los productos
@@ -57,24 +63,36 @@ class ProductosController:
         else:
             return {"message": "Producto no encontrado"}, 404
     def agregar_producto(self):
-        nombre = request.json.get('nombre')
-        precio = request.json.get('precio')
-        categoria = request.json.get('categoria')
-        descripcion = request.json.get('descripcion')
-        stock = request.json.get('stock')
+        nombre = request.form.get('nombre')
+        precio = request.form.get('precio')
+        categoria = request.form.get('categoria')
+        descripcion = request.form.get('descripcion')
+        stock = request.form.get('stock')
+        imagen = request.files.get('imagen')
+
+        imagen_path = None
+        if imagen and allowed_file(imagen.filename):
+            filename = secure_filename(imagen.filename)
+            imagen.save(os.path.join(UPLOAD_FOLDER, filename))
+            imagen_path = os.path.join(UPLOAD_FOLDER, filename)
+        else:
+            return {"status": "error", "message": "Imagen no válida"}, 400
 
         # Agregar producto a la base de datos
-        resultado = ModelProducto().agregar_productoDB(nombre, precio, categoria, descripcion, stock)
+        resultado = ModelProducto().agregar_productoDB(
+            nombre, precio, categoria, descripcion, stock, imagen_path
+        )
 
         # Si el producto se agrega correctamente en la base de datos, también lo añadimos en memoria
-        if resultado[1] == 201:  # Verificar si el estado es éxito (201)
+        if resultado[1] == 201:
             nuevo_producto = {
-                "id": resultado[0]["last_row_id"],  # Obtener el ID generado
+                "id": resultado[0]["last_row_id"],
                 "nombre": nombre,
                 "precio": float(precio),
                 "categoria": categoria,
                 "descripcion": descripcion,
-                "stock": stock
+                "stock": stock,
+                "imagen": imagen_path
             }
             self.productos_lista.append(nuevo_producto)
             self.productos_dict[nuevo_producto["id"]] = nuevo_producto

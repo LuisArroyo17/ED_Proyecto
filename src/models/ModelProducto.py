@@ -9,18 +9,19 @@ class ModelProducto:
         if self.db:
             self.db.close()
 
-    def agregar_productoDB(self, nombre, precio, categoria, descripcion, stock):
+    def agregar_productoDB(self, nombre, precio, categoria, descripcion, stock, imagen_path):
         cursor = self.db.cursor()
         try:
             cursor.execute("""
-                INSERT INTO productos (nombre, precio, categoria, descripcion, stock)
-                VALUES (%s, %s, %s, %s, %s);
-            """, (nombre, precio, categoria, descripcion, stock))
+                INSERT INTO productos (nombre, precio, categoria, descripcion, stock, imagen)
+                VALUES (%s, %s, %s, %s, %s, %s);
+            """, (nombre, precio, categoria, descripcion, stock, imagen_path))
             self.db.commit()
             return {"last_row_id": cursor.lastrowid, "row_count": cursor.rowcount}, 201
         except Exception as e:
             print(f"Error: {e}")
             return {"status": "error", "message": "No se pudo insertar el producto", "error": str(e)}, 500
+
 
     def obtener_productoDB(self, id):
         cursor = self.db.cursor()
