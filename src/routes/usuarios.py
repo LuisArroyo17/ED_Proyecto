@@ -19,3 +19,7 @@ def actualizar_usuario1(id):
 @usuarios_blueprint.route('/usuarios/<int:id>', methods=['DELETE'])
 def eliminar_usuario1(id):
     return UsuariosController().eliminar_usuario(id)
+
+@usuarios_blueprint.route('/login', methods=['POST'])
+def login_usuario():
+    return UsuariosController().login()
