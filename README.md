@@ -25,3 +25,17 @@
 ```bash
   deactivate
 ```
+-----------------Para el front------------------
+Verificar si Node.js está instalado
+```bash
+  node -v
+```
+```bash
+  cd ed-front
+```
+```bash
+  npm install
+```
+```bash
+  npm run dev
+```
