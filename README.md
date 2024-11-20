@@ -26,7 +26,7 @@
   deactivate
 ```
 -----------------Para el front------------------
-Verificar si Node.js está instalado
+- Verificar si Node.js está instalado
 ```bash
   node -v
 ```
