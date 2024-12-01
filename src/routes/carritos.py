@@ -30,4 +30,8 @@ def agregar_producto_carrito_bd():
     usuario_id = request.json.get('usuario_id')
     return CarritosController().agregar_productos_a_db(usuario_id)
 
-
+#carga el carrito de la DB
+@carritos_blueprint.route('/cargarCarrito', methods=['POST'])
+def obtenercarrito_bd():
+    usuario_id = request.json.get('usuario_id')
+    return CarritosController().obtener_carrito(usuario_id)
