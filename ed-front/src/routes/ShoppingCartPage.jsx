@@ -3,6 +3,7 @@ import logo from '../assets/casa-silueta-negra-sin-puerta.png';
 import logo1 from '../assets/menu.png';
 import linea from '../assets/linea.png';
 import carrito from '../assets/carrito-de-compras (1).png';
+
 const ShoppingCartPage = () => {
   // Datos simulados de productos en el carrito
   const [cart, setCart] = useState([
@@ -46,11 +47,7 @@ const ShoppingCartPage = () => {
           <button className=" absolute right-16" onClick={() => (window.location.href = "/carrito")}>
 
           <img src={carrito} alt="carrito" className="h-8 w-8 mr-10 -mt-1"/>
-       
           </button>
-        
-          
-
           <button className="relative" onClick={() => (window.location.href = "/carrito")}>
             <i className="fas fa-shopping-cart text-xl"></i>
             <span className="absolute -top-2.5 right-16 bg-red-500 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
@@ -75,7 +72,13 @@ const ShoppingCartPage = () => {
         
         {/* Lista de productos */} 
         <section className="w-2/3 bg-red-100 rounded-lg shadow-md p-5">
-          <h2 className="text-lg font-bold mb-4">Productos</h2>
+          
+          <h2 className="text-lg font-bold mb-4 ml-4">Productos
+          <span className="text-lg font-bold ml-96">Subtotal</span>
+          </h2>
+     
+          
+        
           <div className="space-y-4">
             {cart.map((producto) => (
               <div
@@ -83,7 +86,7 @@ const ShoppingCartPage = () => {
                 className="flex justify-between items-center border p-4 rounded-md"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gray-200 rounded-md"></div>
+                  <div className="w-16 h-16 bg-red-200 rounded-md"></div>
                   <div>
                     <h3 className="font-bold">{producto.nombre}</h3>
                     <p className="text-sm text-gray-500">
