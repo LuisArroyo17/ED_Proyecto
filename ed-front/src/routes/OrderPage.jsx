@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const OrderPage = () => {
-  const productos = [
-    { id: 1, nombre: "Producto 1", cantidad: 2, precio: 30.0 },
-    { id: 2, nombre: "Producto 2", cantidad: 3, precio: 50.0 },
-    { id: 3, nombre: "Producto 3", cantidad: 1, precio: 20.0 },
-  ];
+  // Estado para los productos
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Cargar productos desde la API
+  useEffect(() => {
+    const cargarProductos = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/cargarCarrito", {
+          method: "POST", // Cambié a POST
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ usuario_id: 1 }), // Cuerpo de la solicitud
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setProductos(data);
+        } else {
+          console.error("Error al cargar los productos.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    cargarProductos();
+  }, []); // Solo se ejecuta una vez al montar el componente
+
+  // Calcular el total
   const totalPagar = productos.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
     0
   );
 
+  // Manejo de botones
   const handleRealizarPedido = () => {
     alert("Pedido realizado con éxito");
   };
@@ -19,6 +47,10 @@ const OrderPage = () => {
   const handleCancelarPedido = () => {
     alert("Pedido cancelado");
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -34,7 +66,7 @@ const OrderPage = () => {
           <button className="relative">
             <i className="fas fa-shopping-cart text-xl"></i>
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
-              2
+              {productos.length}
             </span>
           </button>
           <button className="text-red-500 font-bold">Salir</button>
@@ -48,12 +80,16 @@ const OrderPage = () => {
           <h2 className="text-lg font-bold mb-4">Productos</h2>
           <div className="space-y-4">
             {productos.map((producto) => (
-              <div
-                key={producto.id}
-                className="flex items-center justify-between border p-4 rounded-md"
-              >
+              <div key={producto.id} className="flex items-center justify-between border p-4 rounded-md">
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gray-200 rounded-md"></div>
+                  <div className="w-16 h-16 bg-gray-200 rounded-md">
+                    {/* Mostrar la imagen del producto */}
+                    <img
+                      src={`${producto.imagen}`}
+                      alt={producto.nombre}
+                      className="w-full h-full object-cover rounded-md"
+                    />
+                  </div>
                   <div>
                     <h3 className="font-bold">{producto.nombre}</h3>
                     <p className="text-sm text-gray-500">Cantidad: {producto.cantidad}</p>
@@ -72,8 +108,7 @@ const OrderPage = () => {
           <h2 className="text-lg font-bold mb-4">Resumen del pedido</h2>
           <div className="space-y-2">
             <p className="text-sm">
-              <span className="font-bold">Total a pagar:</span> S/.{" "}
-              {totalPagar.toFixed(2)}
+              <span className="font-bold">Total a pagar:</span> S/. {totalPagar.toFixed(2)}
             </p>
             <p className="text-sm">
               <span className="font-bold">Prioridad:</span> Alta

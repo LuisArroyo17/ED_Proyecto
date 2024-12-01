@@ -115,3 +115,8 @@ class CarritosController:
             resultados.append(resultado)
 
         return jsonify(resultados)
+    
+    def obtener_carrito(self, usuario_id):
+        model_carrito = ModelCarrito()
+        carrito = model_carrito.obtener_carritoDB(usuario_id)
+        return jsonify(carrito)

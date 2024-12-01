@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/home" element={<UserHomePage />} />
-        <Route path="/orderPage" element={<OrderPage/>} />
+        <Route path="/realizarPedido" element={<OrderPage/>} />
         <Route path="/orderQueuePage" element={<OrderQueuePage/>} />
         <Route path="/carrito" element={<ShoppingCartPage/>} />
         <Route path="/PanelAdmin" element={<AdminPanelPage/>} />
