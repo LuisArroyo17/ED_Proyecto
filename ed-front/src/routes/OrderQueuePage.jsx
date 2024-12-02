@@ -95,15 +95,6 @@ const OrderQueuePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="flex justify-between items-center bg-white shadow-md p-4">
-        <div className="flex items-center space-x-4">
-          <button className="text-xl">
-            <i className="fas fa-bars"></i>
-          </button>
-          <h1 className="text-2xl font-bold">Gestión de Pedidos</h1>
-        </div>
-      </header>
-
       <main className="flex flex-1 p-4">
         <div className="w-1/2 bg-white rounded-lg shadow-md p-4">
           <ColaDePedidos pedidos={pedidos} />

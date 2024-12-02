@@ -101,7 +101,7 @@ const ProximoPedidoEnCola = ({ pedido, onProcesar, onCancelar }) => {
                     </div>
                     {producto && (
                       <div className="w-16 h-16 ml-4">
-                        <img src={`${producto.imagen}`} alt={producto.nombre} className="object-cover w-full h-full rounded-md" />
+                        <img src={`../${producto.imagen}`} alt={producto.nombre} className="object-cover w-full h-full rounded-md" />
                       </div>
                     )}
                   </li>
