@@ -15,7 +15,6 @@ const ShoppingCartPage = () => {
   const { userId } = useUser();
   // Cargar los productos del carrito temporal al montar el componente
   useEffect(() => {
-    
     const fetchCart = async () => {
       try {
         const response = await fetch("http://localhost:5000/carrito/temporal/ver");
@@ -37,7 +36,6 @@ const ShoppingCartPage = () => {
 
   // Manejar la eliminación de un producto del carrito
   const handleRemoveItem = async (id) => {
-    
     try {
       const response = await fetch("http://localhost:5000/carrito/temporal/eliminar", {
         method: "DELETE",
@@ -103,11 +101,11 @@ const ShoppingCartPage = () => {
         </div>
         <div className="flex items-center">
 
-          <button className=" absolute right-16" onClick={() => (window.location.href = "/carrito")}>
+          <button className=" absolute right-16" onClick={() => navigate(0)}>
 
           <img src={carrito} alt="carrito" className="h-8 w-8 mr-10 -mt-1"/>
           </button>
-          <button className="relative" onClick={() => (window.location.href = "/carrito")} >
+          <button className="relative" onClick={() => navigate(0)} >
             <i className="fas fa-shopping-cart text-xl"></i>
             <span className="absolute -top-2.5 right-16 bg-red-500 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
               {cart.length}
