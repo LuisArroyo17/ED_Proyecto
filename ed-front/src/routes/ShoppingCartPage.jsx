@@ -3,6 +3,7 @@ import logo from '../assets/casa-silueta-negra-sin-puerta.png';
 import logo1 from '../assets/menu.png';
 import linea from '../assets/linea.png';
 import carrito from '../assets/carrito-de-compras (1).png';
+import { useUser } from "../context/UserContext";
 import {useNavigate} from "react-router-dom";
 
 const ShoppingCartPage = () => {
@@ -11,7 +12,7 @@ const ShoppingCartPage = () => {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const { userId } = useUser();
   // Cargar los productos del carrito temporal al montar el componente
   useEffect(() => {
     
@@ -63,7 +64,7 @@ const ShoppingCartPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ usuario_id: 1 }), // Reemplaza con el ID del usuario real
+        body: JSON.stringify({ usuario_id: userId }), // Reemplaza con el ID del usuario real
       });
       if (response.ok) {
         alert("Compra realizada con éxito");
@@ -133,12 +134,20 @@ const ShoppingCartPage = () => {
                 key={producto.id}
                 className="flex justify-between items-center border p-4 rounded-md"
               >
-                <div>
+                <div className="w-16 h-16 bg-gray-200 rounded-md ">
+                    <img
+                      src={`${producto.imagen}`}
+                      alt={producto.nombre}
+                      className="w-full h-full object-cover rounded-md"
+                    />
+                  </div>
+
+                <div className="absolute ml-20">
                   <h3 className="font-bold">{producto.nombre}</h3>
-                  <p className="text-sm text-gray-500">Cantidad: {producto.cantidad}</p>
-                  <p className="text-sm text-gray-500">Precio: S/. {producto.precio}</p>
+                  <p className="text-sm text-black-500">Cantidad: {producto.cantidad}</p>
+                  <p className="text-sm text-black-500">Precio: S/. {producto.precio}</p>
                 </div>
-                <p className="font-bold">
+                <p className="font-bold ml-1">
                   Subtotal: S/. {(producto.cantidad * producto.precio).toFixed(2)}
                 </p>
                 <button
