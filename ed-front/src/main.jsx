@@ -17,11 +17,6 @@ import ProductDetailE from './routes/ProductDetail.jsx';
 import { AdminLayout } from './layout/AdminLayout.jsx';
 import { GestionarProductosPage, GestionarEnviosPage, GestionarPedidosPage } from './routes/admin';
 
-import OrderSuccessPage from './routes/OrderSuccessPage.jsx'
-import { UserProvider } from './context/UserContext';
-import ProductDetail from './routes/CreateProduct.jsx';
-import ProductDetailE from './routes/ProductDetail.jsx';
-
 createRoot(document.getElementById('root')).render(
   <UserProvider>
     {/* <StrictMode> */}
