@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import ONG from '../../public/ONG.png';
 import Modal from '../components/Modal';
 
-const ProductDetail = () => {
+const ProductDetailE = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -138,4 +138,4 @@ const ProductDetail = () => {
     );
 };
 
-export default ProductDetail;
+export default ProductDetailE;
