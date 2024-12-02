@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const OrderPage = () => {
-  // Estado para los productos
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [prioridad, setPrioridad] = useState("normal"); // Prioridad seleccionada
+  const navigate = useNavigate(); // Hook para redirección
 
   // Cargar productos desde la API
   useEffect(() => {
@@ -39,13 +41,52 @@ const OrderPage = () => {
     0
   );
 
-  // Manejo de botones
-  const handleRealizarPedido = () => {
-    alert("Pedido realizado con éxito");
+  // Crear los detalles para el cuerpo de la solicitud
+  const detalles = productos.map(producto => ({
+    producto_id: producto.id,
+    cantidad: producto.cantidad,
+    precio: producto.precio
+  }));
+
+  // Función para realizar el pedido
+  const handleRealizarPedido = async () => {
+    const pedidoData = {
+      usuario_id: 1,
+      total: totalPagar,
+      estado: "pendiente",
+      detalles: detalles,
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000/pedidos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pedidoData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message); // Mostrar mensaje de éxito
+        navigate("/pedidoconfirmado"); // Redireccionar a la página de confirmación
+      } else {
+        console.error(data.message);
+        alert("Hubo un error al realizar el pedido.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un error al realizar el pedido.");
+    }
   };
 
   const handleCancelarPedido = () => {
     alert("Pedido cancelado");
+  };
+
+  const handlePrioridadChange = (e) => {
+    setPrioridad(e.target.value); // Actualizamos la prioridad seleccionada
   };
 
   if (loading) {
@@ -83,7 +124,6 @@ const OrderPage = () => {
               <div key={producto.id} className="flex items-center justify-between border p-4 rounded-md">
                 <div className="flex items-center space-x-4">
                   <div className="w-16 h-16 bg-gray-200 rounded-md">
-                    {/* Mostrar la imagen del producto */}
                     <img
                       src={`${producto.imagen}`}
                       alt={producto.nombre}
@@ -91,50 +131,49 @@ const OrderPage = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="font-bold">{producto.nombre}</h3>
-                    <p className="text-sm text-gray-500">Cantidad: {producto.cantidad}</p>
+                    <p className="font-semibold">{producto.nombre}</p>
+                    <p className="text-sm text-gray-600">Precio: ${producto.precio}</p>
+                    <p className="text-sm text-gray-600">Cantidad: {producto.cantidad}</p>
                   </div>
                 </div>
-                <p className="font-bold">
-                  S/. {(producto.cantidad * producto.precio).toFixed(2)}
-                </p>
+                <p className="text-lg font-semibold">${producto.precio * producto.cantidad}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Resumen del pedido */}
-        <aside className="w-2/5 bg-white rounded-lg shadow-md p-4 ml-4">
-          <h2 className="text-lg font-bold mb-4">Resumen del pedido</h2>
-          <div className="space-y-2">
-            <p className="text-sm">
-              <span className="font-bold">Total a pagar:</span> S/. {totalPagar.toFixed(2)}
-            </p>
-            <p className="text-sm">
-              <span className="font-bold">Prioridad:</span> Alta
-            </p>
-            <p className="text-sm">
-              <span className="font-bold">Fecha y hora:</span> {new Date().toLocaleString()}
-            </p>
-            <p className="text-sm">
-              <span className="font-bold">Usuario:</span> Usuario123
-            </p>
+        {/* Resumen y detalles */}
+        <section className="w-2/5 bg-white rounded-lg shadow-md p-4 ml-4">
+          <h2 className="text-lg font-bold mb-4">Resumen del Pedido</h2>
+          <div className="mb-4">
+            <label className="font-semibold">Prioridad</label>
+            <select
+              value={prioridad}
+              onChange={handlePrioridadChange}
+              className="mt-2 p-2 border rounded-md w-full"
+            >
+              <option value="normal">Normal</option>
+              <option value="alta">Alta</option>
+            </select>
           </div>
-          <div className="flex space-x-4 mt-4">
+          <div className="mb-4">
+            <p className="font-semibold">Total a pagar: ${totalPagar.toFixed(2)}</p>
+          </div>
+          <div className="flex justify-between">
             <button
               onClick={handleRealizarPedido}
-              className="flex-1 bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md"
             >
-              Realizar pedido
+              Realizar Pedido
             </button>
             <button
               onClick={handleCancelarPedido}
-              className="flex-1 bg-red-500 text-white py-2 rounded-md hover:bg-red-600"
+              className="bg-gray-500 text-white py-2 px-4 rounded-md"
             >
               Cancelar
             </button>
           </div>
-        </aside>
+        </section>
       </main>
     </div>
   );

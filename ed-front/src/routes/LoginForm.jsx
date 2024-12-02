@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useUser } from "../context/UserContext"; // Importamos el contexto
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const { setUser } = useUser(); // Utilizamos la función setUser para almacenar el ID del usuario
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,8 +17,11 @@ const LoginForm = () => {
         body: JSON.stringify({ email, contrasena: password }),
       });
       const data = await response.json();
-  
+
       if (response.ok) {
+        // Al iniciar sesión correctamente, almacenamos el ID del usuario
+        setUser(data.usuario.id); // Guarda el ID del usuario en el contexto
+
         if (data.usuario.rol === "admin") {
           window.location.href = "/admin"; // Redirige a la página del administrador
         } else {
@@ -29,7 +34,6 @@ const LoginForm = () => {
       setErrorMessage("Hubo un problema al conectar con el servidor");
     }
   };
-  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

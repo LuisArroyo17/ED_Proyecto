@@ -10,20 +10,24 @@ import OrderPage from './routes/OrderPage.jsx'
 import OrderQueuePage from './routes/OrderQueuePage.jsx'
 import ShoppingCartPage from './routes/ShoppingCartPage.jsx'
 import AdminPanelPage from './routes/AdminPanelPage.jsx'
+import OrderSuccessPage from './routes/OrderSuccessPage.jsx'
+import { UserProvider } from './context/UserContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <UserProvider>
     <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/home" element={<UserHomePage />} />
         <Route path="/realizarPedido" element={<OrderPage/>} />
-        <Route path="/orderQueuePage" element={<OrderQueuePage/>} />
+        <Route path="/pedidoconfirmado" element={<OrderSuccessPage/>} />
+        <Route path="/pedidoGestion" element={<OrderQueuePage/>} />
         <Route path="/carrito" element={<ShoppingCartPage/>} />
         <Route path="/PanelAdmin" element={<AdminPanelPage/>} />
-
       </Routes>
     </Router>
+    </UserProvider>
   </StrictMode>
 );
