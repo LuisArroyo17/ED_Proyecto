@@ -79,3 +79,9 @@ def obtener_pedido(id):
 def eliminar_pedido(id):
     return pedidos_controller.eliminar_pedido(id)
 
+# Ruta para obtener los detalles de un pedido (GET) 
+@pedidos_blueprint.route('/pedidos/<int:pedido_id>/detalles', methods=['GET'])
+def mostrar_detalles_pedido(pedido_id):
+    return pedidos_controller.mostrar_detalles_pedido(pedido_id)
+
+

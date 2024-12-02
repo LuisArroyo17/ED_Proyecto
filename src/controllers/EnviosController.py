@@ -75,15 +75,12 @@ class EnviosController:
     def agregar_envio(self):
         pedido_id = request.json.get('pedido_id')
         detalles = request.json.get('detalles', '')
-        prioridad = request.json.get('prioridad')  # Requerido
+        prioridad = request.json.get('prioridad', 1)
         estado = 'pendiente'
-
-        # Verificar que se proporcione una prioridad
-        if prioridad is None:
-            return jsonify({"error": "La prioridad es un campo obligatorio"}), 400
 
         resultado, status_code = ModelEnvios().agregar_envioDB(pedido_id, detalles, prioridad, estado)
         if status_code == 201:
+            
             envio = {
                 "envio_id": resultado['data']['envio_id'],
                 "pedido_id": pedido_id,
@@ -96,7 +93,6 @@ class EnviosController:
         
             # Agregar a la cola
             self.envios_cola.append(envio)
-        
         return jsonify(resultado), status_code
 
     def enviar_envio(self):
@@ -116,7 +112,7 @@ class EnviosController:
                 return jsonify(resultado), status_code
         else:
             return jsonify({"message": "No hay envios para enviar"}), 404
-        
+
     def ver_siguiente_envio(self):
         if self.envios_cola:
             siguiente_envio = self.envios_cola[0]  
@@ -161,3 +157,27 @@ class EnviosController:
             return jsonify({"envios": envios_list}), 200
         else:
             return jsonify({"message": "No hay envios"}), 404
+        
+    def enviar_envio_con_mayor_prioridad(self):
+        if self.envios_heap:
+            envio_con_prioridad = self.extraer_envio_con_mayor_prioridad()  # Extraemos el envío con mayor prioridad
+            if "envio_id" in envio_con_prioridad:
+                envio_id = envio_con_prioridad["envio_id"]
+                # Reutilizamos la lógica de enviar_envio
+                envio = next((e for e in self.envios_cola if e["envio_id"] == envio_id), None)
+                if envio:
+                    self.envios_cola.remove(envio)
+                    resultado, status_code = ModelEnvios().actualizar_estadoDB(envio_id, 'en camino')
+                    if status_code == 200:
+                        return jsonify({"message": "Envio con mayor prioridad en camino", "envio": envio}), status_code
+                    else:
+                        # Volver a agregar al heap en caso de error
+                        self.agregar_envio_con_prioridad(envio_id, envio_con_prioridad["prioridad"])
+                        return jsonify(resultado), status_code
+                else:
+                    return jsonify({"message": "Envio no encontrado en la cola"}), 404
+            else:
+                return jsonify(envio_con_prioridad), 404  # No hay envíos en el heap
+        else:
+            return jsonify({"message": "No hay envios en el heap"}), 404
+

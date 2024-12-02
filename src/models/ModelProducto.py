@@ -104,7 +104,7 @@ class ModelProducto:
     def obtener_todos_productosDB(self):
         cursor = self.db.cursor()
         try:
-            cursor.execute("SELECT id, nombre, precio, categoria, descripcion, stock FROM productos;")
+            cursor.execute("SELECT id, nombre, precio, categoria, descripcion, stock, imagen FROM productos;")
             productos = cursor.fetchall()
             if productos: 
                 return {"data": productos}, 200
