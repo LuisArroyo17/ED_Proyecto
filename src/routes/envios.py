@@ -10,7 +10,7 @@ envios_controller = EnviosController()
 def agregar_envio():
     return envios_controller.agregar_envio()
 
-# Ruta para obtener el siguiente envío en la cola sin procesarlo (GET)
+# Ruta para obtener el siguiente envío en la cola sin enviarlo (GET)
 @envios_blueprint.route('/envios/ver_siguiente', methods=['GET'])
 def ver_siguiente_envio():
     return envios_controller.ver_siguiente_envio()
