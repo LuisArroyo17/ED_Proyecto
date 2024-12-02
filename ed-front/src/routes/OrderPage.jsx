@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext";
-import { useNavigate } from "react-router-dom"; // Corrección aquí
+import { useNavigate } from "react-router-dom"; 
 
 const OrderPage = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [prioridad, setPrioridad] = useState("normal"); // Prioridad seleccionada
+  const [prioridad, setPrioridad] = useState("normal");
   const { userId } = useUser();
-  const navigate = useNavigate(); // Corrección aquí: cambiar nabigate a navigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const cargarProductos = async () => {
       try {
         const response = await fetch("http://127.0.0.1:5000/cargarCarrito", {
-          method: "POST", // Cambié a POST
+          method: "POST", 
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ usuario_id: userId }), // Cuerpo de la solicitud
+          body: JSON.stringify({ usuario_id: userId }), 
         });
 
         if (response.ok) {
@@ -34,28 +34,27 @@ const OrderPage = () => {
     };
 
     cargarProductos();
-  }, [userId]); // Ahora depende de userId para cargar productos cuando cambie el usuario
+  }, [userId]); 
 
-  // Calcular el total
   const totalPagar = productos.reduce(
     (total, producto) => total + producto.cantidad * producto.precio,
     0
   );
 
-  // Crear los detalles para el cuerpo de la solicitud
   const detalles = productos.map(producto => ({
     producto_id: producto.id,
     cantidad: producto.cantidad,
     precio: producto.precio
   }));
 
-  // Función para realizar el pedido
   const handleRealizarPedido = async () => {
+    console.log(prioridad);
     const pedidoData = {
-      usuario_id: userId, // Ahora usamos userId
+      usuario_id: userId, 
       total: totalPagar,
       estado: "pendiente",
       detalles: detalles,
+      prioridad: prioridad
     };
 
     try {
@@ -70,8 +69,8 @@ const OrderPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert(data.message); // Mostrar mensaje de éxito
-        navigate("/pedidoconfirmado"); // Redireccionar a la página de confirmación
+        alert(data.message); 
+        navigate("/pedidoconfirmado");
       } else {
         console.error(data.message);
         alert("Hubo un error al realizar el pedido.");
@@ -87,7 +86,7 @@ const OrderPage = () => {
   };
 
   const handlePrioridadChange = (e) => {
-    setPrioridad(e.target.value); // Actualizamos la prioridad seleccionada
+    setPrioridad(e.target.value);
   };
 
   if (loading) {
@@ -153,8 +152,8 @@ const OrderPage = () => {
               onChange={handlePrioridadChange}
               className="mt-2 p-2 border rounded-md w-full"
             >
-              <option value="normal">Normal</option>
-              <option value="alta">Alta</option>
+              <option value="1">Normal</option>
+              <option value="2">Alta</option>
             </select>
           </div>
           <div className="mb-4">

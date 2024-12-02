@@ -10,7 +10,7 @@ class ModelPedido:
     def obtener_todos_pedidos(self):
         cursor = self.db.cursor()
         try:
-            cursor.execute("SELECT id, usuario_id, fecha, total, estado FROM pedidos;")
+            cursor.execute("SELECT id, usuario_id, fecha, total, estado, prioridad FROM pedidos;")
             pedidos = cursor.fetchall()  
             return pedidos, 200
         except Exception as e:
@@ -20,7 +20,7 @@ class ModelPedido:
                 "error": str(e)
             }, 500
             
-    def agregar_pedidoDB(self, usuario_id, total, estado, detalles):
+    def agregar_pedidoDB(self, usuario_id, total, estado, detalles, prioridad):
         cursor = self.db.cursor()
         try:
             cursor.execute("SELECT id FROM usuarios WHERE id = %s;", (usuario_id,))
@@ -32,9 +32,9 @@ class ModelPedido:
                     "error": f"Usuario con id {usuario_id} no encontrado"
                 }, 400
             cursor.execute("""
-                INSERT INTO pedidos (usuario_id, total, estado)
-                VALUES (%s, %s, %s);
-            """, (usuario_id, total, estado))
+                INSERT INTO pedidos (usuario_id, total, estado, prioridad)
+                VALUES (%s, %s, %s, %s);
+            """, (usuario_id, total, estado, prioridad))
             pedido_id = cursor.lastrowid  
 
             for detalle in detalles:
@@ -54,11 +54,13 @@ class ModelPedido:
                     "pedido_id": pedido_id,
                     "total": total,
                     "estado": estado,
-                    "detalles": detalles
+                    "detalles": detalles,
+                    "prioridad": prioridad
                 }
             }, 201
         except Exception as e:
             self.db.rollback()  
+            print(e)
             return {
                 "status": "error",
                 "message": "No se pudo agregar el pedido",
@@ -68,7 +70,7 @@ class ModelPedido:
     def obtener_pedidos_pendientes(self):
         cursor = self.db.cursor()
         try:
-            cursor.execute("SELECT id, usuario_id, fecha, total, estado FROM pedidos WHERE estado = 'pendiente';")
+            cursor.execute("SELECT id, usuario_id, fecha, total, prioridad, estado FROM pedidos WHERE estado = 'pendiente';")
             pedidos = cursor.fetchall()  
             return pedidos, 200
         except Exception as e:
@@ -129,5 +131,22 @@ class ModelPedido:
             return {
                 "status": "error",
                 "message": "Error al eliminar el pedido",
+                "error": str(e)
+            }, 500
+    def obtener_detalles_pedido(self, pedido_id):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("""
+                SELECT dp.id, dp.pedido_id, dp.producto_id, dp.cantidad, dp.precio, p.nombre AS producto_nombre
+                FROM detalle_pedidos dp
+                JOIN productos p ON dp.producto_id = p.id
+                WHERE dp.pedido_id = %s;
+            """, (pedido_id,))
+            detalles = cursor.fetchall()
+            return detalles, 200
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": "Error al obtener los detalles del pedido",
                 "error": str(e)
             }, 500

@@ -71,7 +71,8 @@ class DB:
                     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     total NUMERIC(10, 2) NOT NULL,
                     estado VARCHAR(50) DEFAULT 'pendiente',
-                    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+                    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+                    prioridad INT DEFAULT 1,
                 );
             """)
             
