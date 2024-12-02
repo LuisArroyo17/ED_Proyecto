@@ -65,3 +65,8 @@ def mostrar_todos_los_envios_priorizados():
 @envios_blueprint.route('/envios/enviar_mayor_prioridad', methods=['POST'])
 def enviar_envio_con_mayor_prioridad():
     return envios_controller.enviar_envio_con_mayor_prioridad()
+
+# Ruta para obtener un envio específico de la base de datos (GET)
+@envios_blueprint.route('/envios/<int:envio_id>', methods=['GET'])
+def obtener_envio_id(envio_id):
+    return envios_controller.obtener_envio_id(envio_id)
