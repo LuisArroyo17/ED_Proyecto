@@ -14,7 +14,7 @@ def traer_todo():
 def añadir_carrito_temporal():
     return CarritosController().añadir_carrito_temporal()
 
-# Rota para eliminar un producto de la lista doble enlazada
+# Ruta para eliminar un producto de la lista doble enlazada
 @carritos_blueprint.route('/carrito/temporal/eliminar', methods=['DELETE'])
 def eliminar_producto_temporal():
     return CarritosController().eliminar_producto_temporal()

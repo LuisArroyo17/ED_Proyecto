@@ -1,6 +1,8 @@
 from flask import json
+import pymysql.cursors
 from utils.creartablas import DB
 from utils.db import get_connection 
+import pymysql
 class ModelCarrito:
     def __init__(self):
         self.db = get_connection()
@@ -22,7 +24,7 @@ class ModelCarrito:
             return {"status": "error", "message": str(e)}, 500
         
     def obtener_productosDB(self):
-        cursor = self.db.cursor()
+        cursor = self.db.cursor(pymysql.cursors.DictCursor)
         try:
             cursor.execute("SELECT * FROM productos")  # Consultar todos los productos
             productos = cursor.fetchall()  # Obtener todos los registros

@@ -35,6 +35,8 @@ class ListaEnlazadaDoble:
                     nodo_actual.siguiente.anterior = nodo_actual.anterior
                 else:
                     self.cola = nodo_actual.anterior
+                    
+                   
                 return {"message": f"Producto con ID {producto_id} eliminado del carrito"}
             nodo_actual = nodo_actual.siguiente
         return {"message": f"Producto con ID {producto_id} no encontrado en el carrito"}
@@ -56,19 +58,19 @@ class CarritosController:
     def __init__(self):
         # Usa la lista doblemente enlazada para el carrito temporal
         self.carrito_temporal = carrito_temporal_global
-        
+    """  
     def agregar_carrito(self):
         usuario_id = request.json.get('usuario_id')
         producto_id = request.json.get('producto_id')
         cantidad = request.json.get('cantidad')
-        
+    
         # Crear una instancia de ModelCarrito
         model_carrito = ModelCarrito()
         
         # Llamar al método de instancia
         carrito = model_carrito.agregar_carritoDB(usuario_id, producto_id, cantidad)
         return carrito
-
+    """
     def traer_productos(self):
         # Crear una instancia de ModelCarrito
         model_carrito = ModelCarrito()
@@ -113,7 +115,8 @@ class CarritosController:
             cantidad = producto['cantidad']
             resultado = model_carrito.agregar_carritoDB(usuario_id, producto_id, cantidad)
             resultados.append(resultado)
-
+            # Eliminar el producto de la lista temporal después de agregarlo a la base de datos
+            self.carrito_temporal.eliminar(producto_id)
         return jsonify(resultados)
     
     def obtener_carrito(self, usuario_id):
