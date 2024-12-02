@@ -3,10 +3,11 @@ import logo from '../assets/casa-silueta-negra-sin-puerta.png';
 import logo1 from '../assets/menu.png';
 import linea from '../assets/linea.png';
 import carrito from '../assets/carrito-de-compras (1).png';
-
+import {useNavigate} from "react-router-dom";
 
 const ShoppingCartPage = () => {
   // Estado para almacenar los productos del carrito
+  const navigate = useNavigate(); //HOOk
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -67,7 +68,7 @@ const ShoppingCartPage = () => {
       if (response.ok) {
         alert("Compra realizada con éxito");
         setCart([]); // Limpiar el carrito después de la compra
-        window.location.href = "/realizarPedido";
+        navigate("/realizarPedido");
       } else {
         alert("Error al procesar la compra");
       }
@@ -91,7 +92,7 @@ const ShoppingCartPage = () => {
       <header className="flex justify-between items-center bg-yellow-300 shadow-md p-2">
         <div className="flex items-center -space-x-0">
           <button >
-          <img src={logo} alt="Logo" className="h-8 w-8 ml-1" onClick={() => (window.location.href = "/home")}/>
+          <img src={logo} alt="Logo" className="h-8 w-8 ml-1" onClick={() => navigate("/home")}/>
           </button>
           <img src={linea} alt="linea" className="h-8 w-8 " />
           <button>
@@ -105,7 +106,7 @@ const ShoppingCartPage = () => {
 
           <img src={carrito} alt="carrito" className="h-8 w-8 mr-10 -mt-1"/>
           </button>
-          <button className="relative" onClick={() => (window.location.href = "/carrito")}>
+          <button className="relative" onClick={() => (window.location.href = "/carrito")} >
             <i className="fas fa-shopping-cart text-xl"></i>
             <span className="absolute -top-2.5 right-16 bg-red-500 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
               {cart.length}
@@ -113,7 +114,7 @@ const ShoppingCartPage = () => {
           </button>
           
           <img src={linea} alt="linea" className="absolute h-8 w-8 right-10"/>
-          <button className="absolute text-red-500 font-bold right-3 top-4"  onClick={() => (window.location.href = "/")}>Salir</button>
+          <button className="absolute text-red-500 font-bold right-3 top-4"  onClick={() => navigate("/")}>Salir</button>
           
           
         </div>
