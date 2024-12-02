@@ -28,7 +28,6 @@ createRoot(document.getElementById('root')).render(
         <Route path="/pedidoconfirmado" element={<OrderSuccessPage/>} />
         <Route path="/pedidoGestion" element={<OrderQueuePage/>} />
         <Route path="/carrito" element={<ShoppingCartPage/>} />
-        <Route path="/PanelAdmin" element={<AdminPanelPage/>} />
         <Route path="/CrearProducto" element={<ProductDetail/>} />
         <Route path="/ModificarProducto" element={<ProductDetailE />} />
       </Routes>
