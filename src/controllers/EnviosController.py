@@ -75,12 +75,15 @@ class EnviosController:
     def agregar_envio(self):
         pedido_id = request.json.get('pedido_id')
         detalles = request.json.get('detalles', '')
-        prioridad = request.json.get('prioridad', 1)
+        prioridad = request.json.get('prioridad')  # Requerido
         estado = 'pendiente'
+
+        # Verificar que se proporcione una prioridad
+        if prioridad is None:
+            return jsonify({"error": "La prioridad es un campo obligatorio"}), 400
 
         resultado, status_code = ModelEnvios().agregar_envioDB(pedido_id, detalles, prioridad, estado)
         if status_code == 201:
-            
             envio = {
                 "envio_id": resultado['data']['envio_id'],
                 "pedido_id": pedido_id,
@@ -88,7 +91,12 @@ class EnviosController:
                 "prioridad": prioridad,
                 "estado": estado
             }
+            # Agregar al heap de prioridad
+            self.agregar_envio_con_prioridad(envio['envio_id'], prioridad)
+        
+            # Agregar a la cola
             self.envios_cola.append(envio)
+        
         return jsonify(resultado), status_code
 
     def enviar_envio(self):
@@ -108,7 +116,7 @@ class EnviosController:
                 return jsonify(resultado), status_code
         else:
             return jsonify({"message": "No hay envios para enviar"}), 404
-
+        
     def ver_siguiente_envio(self):
         if self.envios_cola:
             siguiente_envio = self.envios_cola[0]  
