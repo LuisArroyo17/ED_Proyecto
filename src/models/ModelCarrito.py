@@ -29,3 +29,17 @@ class ModelCarrito:
             return productos  # Devolver la lista de productos
         except Exception as e:
             return {"status": "error", "message": str(e)}
+        
+    def obtener_carritoDB(self, usuario_id):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("""
+                SELECT p.id, p.nombre, p.precio, c.cantidad, p.imagen
+                FROM carrito_compras c
+                INNER JOIN productos p ON c.producto_id = p.id
+                WHERE c.usuario_id = %s;
+            """, (usuario_id,))
+            productos = cursor.fetchall()
+            return productos
+        except Exception as e:
+            return {"status": "error", "message": str(e)}

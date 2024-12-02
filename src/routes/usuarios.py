@@ -4,7 +4,7 @@ from controllers.UsuariosController import UsuariosController
 
 usuarios_blueprint = Blueprint('usuario', __name__)
 
-@usuarios_blueprint.route('/usuarios', methods=['POST']) 
+@usuarios_blueprint.route('/register', methods=['POST']) 
 def agregar_usuario1():
     return UsuariosController().agregar_usuario()
 

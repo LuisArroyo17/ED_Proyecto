@@ -6,7 +6,7 @@ from decimal import Decimal
 from utils.bst import ArbolProductoBST  # Importa el BST
 from werkzeug.utils import secure_filename
 import os
-UPLOAD_FOLDER = 'src/static/uploads' 
+UPLOAD_FOLDER = 'ed-front/public' 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and \
@@ -74,7 +74,7 @@ class ProductosController:
         if imagen and allowed_file(imagen.filename):
             filename = secure_filename(imagen.filename)
             imagen.save(os.path.join(UPLOAD_FOLDER, filename))
-            imagen_path = os.path.join(UPLOAD_FOLDER, filename)
+            imagen_path = os.path.join('public/', filename)
         else:
             return {"status": "error", "message": "Imagen no válida"}, 400
 
