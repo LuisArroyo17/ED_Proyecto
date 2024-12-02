@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useUser } from "../context/UserContext";
 const OrderPage = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [prioridad, setPrioridad] = useState("normal"); // Prioridad seleccionada
-  const navigate = useNavigate(); // Hook para redirección
-
+  const { userId } = useUser();
   // Cargar productos desde la API
   useEffect(() => {
+    
     const cargarProductos = async () => {
       try {
         const response = await fetch("http://127.0.0.1:5000/cargarCarrito", {
@@ -16,7 +15,7 @@ const OrderPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ usuario_id: 1 }), // Cuerpo de la solicitud
+          body: JSON.stringify({ usuario_id: userId }), // Cuerpo de la solicitud
         });
 
         if (response.ok) {

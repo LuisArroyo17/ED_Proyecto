@@ -1,39 +1,31 @@
 import React from "react";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const UserHomePage = () => {
+  const { userId } = useUser();
+  console.log("ID del usuario:", userId);
+  const navigate = useNavigate();
+  
+  const redirigir = () => {
+    navigate("/realizarPedido");
+  };
+  
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* Menú lateral */}
       <aside className="w-1/4 bg-white shadow-md p-4">
         <h2 className="text-lg font-bold mb-4">Menú de opciones</h2>
         <ul className="space-y-2">
-          <li className="p-2 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300">
-            Categorías
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Tecnología
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Hogar
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Línea blanca
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Moda Hombre
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Moda Mujer
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Dormitorio
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Muebles
-          </li>
-          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">
-            Deportes
-          </li>
+          <li className="p-2 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300">Categorías</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Tecnología</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Hogar</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Línea blanca</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Moda Hombre</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Moda Mujer</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Dormitorio</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Muebles</li>
+          <li className="p-2 rounded-md cursor-pointer hover:bg-gray-300">Deportes</li>
         </ul>
       </aside>
 
@@ -72,7 +64,10 @@ const UserHomePage = () => {
               <div className="h-32 bg-gray-200 rounded-md mb-2"></div>
               <h3 className="text-sm font-bold">Nombre del producto</h3>
               <p className="text-sm text-gray-500">S/. 30.00</p>
-              <button className="mt-2 p-2 bg-blue-500 text-white rounded-md w-full">
+              <button
+                className="mt-2 p-2 bg-blue-500 text-white rounded-md w-full"
+                onClick={redirigir}
+              >
                 Ver detalles
               </button>
             </div>

@@ -11,11 +11,11 @@ import OrderQueuePage from './routes/OrderQueuePage.jsx'
 import ShoppingCartPage from './routes/ShoppingCartPage.jsx'
 import AdminPanelPage from './routes/AdminPanelPage.jsx'
 import OrderSuccessPage from './routes/OrderSuccessPage.jsx'
-import { UserProvider } from './context/UserContext.jsx';
+import { UserProvider } from './context/UserContext';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <UserProvider>
+  <UserProvider>
+  {/* <StrictMode> */}
     <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
@@ -28,6 +28,6 @@ createRoot(document.getElementById('root')).render(
         <Route path="/PanelAdmin" element={<AdminPanelPage/>} />
       </Routes>
     </Router>
-    </UserProvider>
-  </StrictMode>
+  {/* </StrictMode> */}
+  </UserProvider>
 );

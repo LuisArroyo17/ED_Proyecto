@@ -1,19 +1,29 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Creamos el contexto
 const UserContext = createContext();
 
-export const useUser = () => useContext(UserContext);
+export function UserProvider({ children }) {
+  // Leer el ID de usuario desde localStorage al montar el componente
+  const [userId, setUserId] = useState(() => {
+    // Obtener el ID de usuario desde localStorage, si existe
+    const savedUserId = localStorage.getItem('userId');
+    return savedUserId ? JSON.parse(savedUserId) : null;
+  });
 
-export const UserProvider = ({ children }) => {
-  const [userId, setUserId] = useState(null);
-
-  const setUser = (id) => setUserId(id);
-  const logout = () => setUserId(null);
+  // Guardar el ID de usuario en localStorage cuando cambie
+  useEffect(() => {
+    if (userId !== null) {
+      localStorage.setItem('userId', JSON.stringify(userId));
+    }
+  }, [userId]);
 
   return (
-    <UserContext.Provider value={{ userId, setUser, logout }}>
+    <UserContext.Provider value={{ userId, setUserId }}>
       {children}
     </UserContext.Provider>
   );
-};
+}
+
+export function useUser() {
+  return useContext(UserContext);
+}
