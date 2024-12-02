@@ -45,7 +45,7 @@ const AdminPanelPage = () => {
             <h2 className="text-lg font-bold mb-4">Gestionar Productos</h2>
             <p className="text-sm text-gray-500 mb-6">Administrar productos en el sistema</p>
             <button
-              onClick={() => navigate("/gestionar-productos")}
+              onClick={() => navigate("/admin")}
               className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
             >
               Gestionar
