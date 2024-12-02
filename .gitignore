@@ -4,3 +4,5 @@ instance/
 
 # nombre del entorno virtual
 .env
+
+.envvars
