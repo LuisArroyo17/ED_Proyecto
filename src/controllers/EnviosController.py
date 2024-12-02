@@ -158,6 +158,10 @@ class EnviosController:
         else:
             return jsonify({"message": "No hay envios"}), 404
         
+    def obtener_envio_id(self, envio_id):
+        resultado = ModelEnvios().obtener_envio_por_id(envio_id)
+        return jsonify({"envio": resultado}), 200
+        
     def enviar_envio_con_mayor_prioridad(self):
         if self.envios_heap:
             envio_con_prioridad = self.extraer_envio_con_mayor_prioridad()  # Extraemos el envío con mayor prioridad
@@ -180,4 +184,6 @@ class EnviosController:
                 return jsonify(envio_con_prioridad), 404  # No hay envíos en el heap
         else:
             return jsonify({"message": "No hay envios en el heap"}), 404
+
+
 
