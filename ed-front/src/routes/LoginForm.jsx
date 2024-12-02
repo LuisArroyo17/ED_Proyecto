@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const { setUserId } = useUser();
+  const navigate = useNavigate(); // Hook para navegar sin recargar la página
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,12 +19,18 @@ const LoginForm = () => {
         body: JSON.stringify({ email, contrasena: password }),
       });
       const data = await response.json();
-  
+
       if (response.ok) {
+        // Al iniciar sesión correctamente, almacenamos el ID del usuario
+        setUserId(data.usuario.id);
+
+        // Imprimimos el ID del usuario en consola
+        console.log("ID del usuario:", data.usuario.id);
+
         if (data.usuario.rol === "admin") {
-          window.location.href = "/admin"; // Redirige a la página del administrador
+          navigate("/admin"); // Navegamos a /admin sin recargar la página
         } else {
-          window.location.href = "/home"; // Redirige a la página de usuario estándar
+          navigate("/home"); // Navegamos a /home sin recargar la página
         }
       } else {
         setErrorMessage(data.message || "Error al iniciar sesión");
@@ -29,7 +39,6 @@ const LoginForm = () => {
       setErrorMessage("Hubo un problema al conectar con el servidor");
     }
   };
-  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -50,10 +59,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium mb-2"
-            >
+            <label htmlFor="password" className="block text-sm font-medium mb-2">
               Contraseña
             </label>
             <input
@@ -65,12 +71,8 @@ const LoginForm = () => {
               className="w-full p-2 border border-gray-300 rounded-md"
             />
           </div>
-          {errorMessage && (
-            <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-          )}
-          {successMessage && (
-            <p className="text-green-500 text-sm mt-2">{successMessage}</p>
-          )}
+          {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+          {successMessage && <p className="text-green-500 text-sm mt-2">{successMessage}</p>}
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
@@ -79,7 +81,7 @@ const LoginForm = () => {
           </button>
         </form>
         <button
-          onClick={() => (window.location.href = "/register")}
+          onClick={() => navigate("/register")} // Usamos navigate para ir a la página de registro
           className="mt-4 w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600"
         >
           Registrar

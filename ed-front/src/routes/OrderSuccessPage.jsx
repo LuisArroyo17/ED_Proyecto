@@ -3,7 +3,7 @@ import React from "react";
 const OrderSuccessPage = () => {
   const handleViewOrder = () => {
     // Redirigir a la página de seguimiento/envío
-    window.location.href = "/envio";
+    // window.location.href = "/envio";
   };
 
   return (
