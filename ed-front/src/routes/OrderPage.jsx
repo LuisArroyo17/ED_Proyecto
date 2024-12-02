@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router-dom"; // Corrección aquí
+
 const OrderPage = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [prioridad, setPrioridad] = useState("normal"); // Prioridad seleccionada
   const { userId } = useUser();
-  // Cargar productos desde la API
+  const navigate = useNavigate(); // Corrección aquí: cambiar nabigate a navigate
+
   useEffect(() => {
-    
     const cargarProductos = async () => {
       try {
         const response = await fetch("http://127.0.0.1:5000/cargarCarrito", {
@@ -32,7 +34,7 @@ const OrderPage = () => {
     };
 
     cargarProductos();
-  }, []); // Solo se ejecuta una vez al montar el componente
+  }, [userId]); // Ahora depende de userId para cargar productos cuando cambie el usuario
 
   // Calcular el total
   const totalPagar = productos.reduce(
@@ -50,7 +52,7 @@ const OrderPage = () => {
   // Función para realizar el pedido
   const handleRealizarPedido = async () => {
     const pedidoData = {
-      usuario_id: 1,
+      usuario_id: userId, // Ahora usamos userId
       total: totalPagar,
       estado: "pendiente",
       detalles: detalles,

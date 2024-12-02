@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ColaDePedidos from '../components/ColaDePedidos';
 import ProximoPedidoEnCola from '../components/ProximoPedidoEnCola';
+import { useNavigate } from 'react-router-dom';
 
 const OrderQueuePage = () => {
   const [pedidos, setPedidos] = useState([]);
   const [proximoPedido, setProximoPedido] = useState(null);
   const [mensaje, setMensaje] = useState('');
-
+  const navigate = useNavigate();
   const cargarPedidos = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/pedidos');
@@ -28,6 +29,7 @@ const OrderQueuePage = () => {
 
   const procesarPedido = async () => {
     if (proximoPedido) {
+      console.log('Procesando pedido:', proximoPedido.pedido_id);
       try {
         const response = await fetch('http://127.0.0.1:5000/pedidos/procesar', {
           method: 'POST',
@@ -37,9 +39,11 @@ const OrderQueuePage = () => {
           body: JSON.stringify({ pedido_id: proximoPedido.pedido_id }),
         });
         const data = await response.json();
-        if (data.status === 'success') {
+        console.log('Respuesta del servidor:', data);
+        if (data.message === 'Pedido procesado') {
           setMensaje('Pedido procesado exitosamente');
-          cargarPedidos();
+          console.log('Pedido procesado exitosamente');
+          cargarPedidos()
         }
       } catch (error) {
         console.error('Error al procesar el pedido:', error);
@@ -51,10 +55,11 @@ const OrderQueuePage = () => {
     if (proximoPedido) {
       try {
         const response = await fetch(`http://127.0.0.1:5000/pedidos/cancelar/${proximoPedido.pedido_id}`, {
-          method: 'DELETE',
+          method: 'POST',
         });
         const data = await response.json();
-        if (data.status === 'success') {
+        console.log('Respuesta del servidor:', data);
+        if (data.message === 'Pedido cancelado') {
           setMensaje('Pedido cancelado correctamente');
           cargarPedidos();
         }
