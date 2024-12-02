@@ -10,6 +10,8 @@ import OrderPage from './routes/OrderPage.jsx'
 import OrderQueuePage from './routes/OrderQueuePage.jsx'
 import ShoppingCartPage from './routes/ShoppingCartPage.jsx'
 import AdminPanelPage from './routes/AdminPanelPage.jsx'
+import ProductDetail from './routes/ProductDetail.jsx'
+import CreateProduct from './routes/CreateProduct.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -22,7 +24,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/orderQueuePage" element={<OrderQueuePage/>} />
         <Route path="/carrito" element={<ShoppingCartPage/>} />
         <Route path="/PanelAdmin" element={<AdminPanelPage/>} />
-
+        <Route path="/detalle-producto/:id" element={<ProductDetail />} />
+        <Route path="/crear-producto" element={<CreateProduct />} />
       </Routes>
     </Router>
   </StrictMode>
