@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ColaDeEnvios from '../components/ColaDeEnvios';
 import ProximoEnvioEnCola from '../components/ProximoEnvioEnCola';
+import ProximoEnvioEnColaConPrioridad from '../components/ProximoEnvioEnColaConPrioridad';  // Nuevo componente
 import { useNavigate } from 'react-router-dom';
 
 const EnvioQueuePage = () => {
@@ -22,7 +23,7 @@ const EnvioQueuePage = () => {
         setProximoEnvio(null);
       }
     } catch (error) {
-      console.error("Error al cargar los envíos:", error);
+      console.error('Error al cargar los envíos:', error);
     }
   };
 
@@ -33,7 +34,7 @@ const EnvioQueuePage = () => {
       const data = await response.json();
       setEnvioConPrioridad(data || null);
     } catch (error) {
-      console.error("Error al cargar el envío con mayor prioridad:", error);
+      console.error('Error al cargar el envío con mayor prioridad:', error);
     }
   };
 
@@ -74,7 +75,7 @@ const EnvioQueuePage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ envio_id: envioConPrioridad.envio_id })
+          body: JSON.stringify({ envio_id: envioConPrioridad.envio_id }),
         });
 
         const dataEnvio = await responseEnvio.json();
@@ -122,36 +123,12 @@ const EnvioQueuePage = () => {
             <h2 className="text-lg font-bold mb-4">No hay envíos en cola</h2>
           </div>
         )}
-        <div className="w-1/2 bg-white rounded-lg shadow-md p-4 ml-4">
-          <h2 className="text-lg font-bold mb-4">Próximo Envío en Cola con Prioridad</h2>
-          {envioConPrioridad ? (
-            <div className="space-y-2">
-              <p className="text-sm">
-                <span className="font-bold">ID del Envío:</span> {envioConPrioridad.envio_id}
-              </p>
-              <p className="text-sm">
-                <span className="font-bold">Prioridad:</span> Alta
-              </p>
-              <p className="text-sm">
-                <span className="font-bold">Estado:</span> {envioConPrioridad.estado}
-              </p>
-              <button
-                onClick={enviarEnvioConPrioridad}
-                className="bg-yellow-500 text-white p-2 rounded-md mt-4"
-              >
-                Enviar con Prioridad
-              </button>
-              <button
-                onClick={() => cancelarEnvio(envioConPrioridad.envio_id)}
-                className="bg-red-500 text-white p-2 rounded-md mt-4"
-              >
-                Cancelar Envío
-              </button>
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">No hay envíos con prioridad</p>
-          )}
-        </div>
+
+        <ProximoEnvioEnColaConPrioridad
+          envioConPrioridad={envioConPrioridad}
+          onEnviarConPrioridad={enviarEnvioConPrioridad}
+          onCancelar={cancelarEnvio}
+        />
       </main>
 
       {mensaje && (

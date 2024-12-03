@@ -76,7 +76,6 @@ class EnviosController:
         pedido_id = request.json.get('pedido_id')
         detalles = request.json.get('detalles', '')
         prioridad = request.json.get('prioridad', 1)
-        prioridad = request.json.get('prioridad', 1)
         estado = 'pendiente'
 
         resultado, status_code = ModelEnvios().agregar_envioDB(pedido_id, detalles, prioridad, estado)
