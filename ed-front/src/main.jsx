@@ -17,22 +17,29 @@ import ProductDetailE from './routes/ProductDetail.jsx';
 
 createRoot(document.getElementById('root')).render(
   <UserProvider>
-  {/* <StrictMode> */}
+    {/* <StrictMode> */}
     <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/home" element={<UserHomePage />} />
-        <Route path="/admin" element={<AdminPanelPage />} />
-        <Route path="/realizarPedido" element={<OrderPage/>} />
-        <Route path="/pedidoconfirmado" element={<OrderSuccessPage/>} />
-        <Route path="/pedidoGestion" element={<OrderQueuePage/>} />
-        <Route path="/carrito" element={<ShoppingCartPage/>} />
-        <Route path="/PanelAdmin" element={<AdminPanelPage/>} />
-        <Route path="/CrearProducto" element={<ProductDetail/>} />
+        <Route path="/realizarPedido" element={<OrderPage />} />
+        <Route path="/pedidoconfirmado" element={<OrderSuccessPage />} />
+        <Route path="/pedidoGestion" element={<OrderQueuePage />} />
+        <Route path="/carrito" element={<ShoppingCartPage />} />
+        <Route path="/PanelAdmin" element={<AdminPanelPage />} />
+        <Route path="/CrearProducto" element={<ProductDetail />} />
         <Route path="/ModificarProducto" element={<ProductDetailE />} />
+        <Route path="/envio" element={<EnvioPage />} /> 
+
+        <Route path='/admin' element={<AdminLayout />}>
+          <Route path="gestionar-productos" element={<GestionarProductosPage />} />
+          <Route path="gestionar-envios" element={<GestionarEnviosPage />} />
+          <Route path="gestionar-pedidos" element={<GestionarPedidosPage />} />
+        </Route>
+
       </Routes>
     </Router>
-  {/* </StrictMode> */}
+    {/* </StrictMode> */}
   </UserProvider>
 );

@@ -112,3 +112,13 @@ class ModelEnvios:
                 "message": "Error al eliminar el envio",
                 "error": str(e)
             }, 500
+        
+    def obtener_envio_por_id(self, id):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("SELECT id, pedido_id, detalles, prioridad, estado FROM envios WHERE id = %s", (id,))
+            envios = cursor.fetchall()
+            return envios, 200
+        except Exception as e:
+            print(f"Error al obtener el envío por ID: {str(e)}")
+            return None

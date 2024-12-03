@@ -10,7 +10,7 @@ envios_controller = EnviosController()
 def agregar_envio():
     return envios_controller.agregar_envio()
 
-# Ruta para obtener el siguiente envío en la cola sin enviarlo (GET)
+# Ruta para obtener el siguiente envío en la cola sin procesarlo (GET)
 @envios_blueprint.route('/envios/ver_siguiente', methods=['GET'])
 def ver_siguiente_envio():
     return envios_controller.ver_siguiente_envio()
@@ -61,3 +61,12 @@ def extraer_envio_con_mayor_prioridad():
 def mostrar_todos_los_envios_priorizados():
     envios = envios_controller.mostrar_todos_los_envios_priorizados()
     return jsonify({"envios": envios}), 200
+
+@envios_blueprint.route('/envios/enviar_mayor_prioridad', methods=['POST'])
+def enviar_envio_con_mayor_prioridad():
+    return envios_controller.enviar_envio_con_mayor_prioridad()
+
+# Ruta para obtener un envio específico de la base de datos (GET)
+@envios_blueprint.route('/envios/<int:envio_id>', methods=['GET'])
+def obtener_envio_id(envio_id):
+    return envios_controller.obtener_envio_id(envio_id)
