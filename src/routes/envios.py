@@ -62,6 +62,7 @@ def mostrar_todos_los_envios_priorizados():
     envios = envios_controller.mostrar_todos_los_envios_priorizados()
     return jsonify({"envios": envios}), 200
 
+# Ruta para enviar mayor prioridad
 @envios_blueprint.route('/envios/enviar_mayor_prioridad', methods=['POST'])
 def enviar_envio_con_mayor_prioridad():
     return envios_controller.enviar_envio_con_mayor_prioridad()

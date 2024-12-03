@@ -196,7 +196,7 @@ class EnviosController:
 
     # Obtener todos los envíos de un usuario
     def obtener_envios_por_usuario(self, usuario_id):
-        envios, status_code = ModelEnvios().obtener_envio_por_id(usuario_id)
+        envios, status_code = ModelEnvios().obtener_envio_por_usuario(usuario_id)
         if status_code == 200:
             return jsonify({"envios": envios}), 200
         return jsonify(envios), status_code

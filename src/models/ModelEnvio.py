@@ -124,7 +124,7 @@ class ModelEnvios:
             return None
 
         #Método para obtener los envíos de un id de usuario
-    def obtener_envio_por_id(self, usuario_id):
+    def obtener_envio_por_usuario(self, usuario_id):
         cursor = self.db.cursor()
         try:
             cursor.execute("""
