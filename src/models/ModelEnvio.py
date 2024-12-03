@@ -123,7 +123,7 @@ class ModelEnvios:
             print(f"Error al obtener el envío por ID: {str(e)}")
             return None
 
-        #Método para obtener los envíos de un usuario
+        #Método para obtener los envíos de un id de usuario
     def obtener_envio_por_id(self, usuario_id):
         cursor = self.db.cursor()
         try:

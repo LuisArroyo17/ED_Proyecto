@@ -1,70 +1,60 @@
-import React, { useState, useEffect } from 'react'; 
-import { useNavigate } from 'react-router-dom'; 
+import { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext";
 
 const EnvioPage = () => {
-  const { userId } = useUser();  // Obtener el userId del contexto
-  const [envios, setEnvios] = useState([]); // Estado para almacenar los envíos del usuario
-  const navigate = useNavigate();
+  const { userId } = useUser();
+  const [envios, setEnvios] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const obtenerEnvios = async () => {
-      try {
-        // 1. Obtener los pedidos del usuario
-        const pedidosResponse = await fetch(`http://localhost:5000/pedidos?usuario_id=${userId}`);
-        const pedidosData = await pedidosResponse.json();
+    console.log("UserId:", userId); // Verifica si el userId es correcto
+    if (!userId) {
+      setError("No se encontró el ID del usuario.");
+      return;
+    }
 
-        if (pedidosData.length > 0) {
-          // 2. Obtener los envíos asociados a esos pedidos
-          const pedidosIds = pedidosData.map(pedido => pedido.pedido_id); // Extraemos los IDs de los pedidos
-          const enviosResponse = await fetch(`http://localhost:5000/envios?pedido_id_in=${pedidosIds.join(',')}`);
-          const enviosData = await enviosResponse.json();
-          setEnvios(enviosData); // Guardamos los envíos asociados a los pedidos
-        } else {
-          setEnvios([]); // Si no hay pedidos, no hay envíos asociados
+    const fetchEnvios = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/envios/usuario/${userId}`);
+        if (!response.ok) {
+          throw new Error("Error al cargar los envíos.");
         }
+
+        const data = await response.json();
+        console.log("Envios data:", data); // Verifica los datos que recibes de la API
+        setEnvios(data);
       } catch (error) {
-        console.error("Error al cargar los envíos:", error);
+        console.error(error);
+        setError(error.message);
       }
     };
 
-    obtenerEnvios();
-  }, [userId]); // Dependencia de userId para recargar los datos al cambiar el usuario
+    fetchEnvios();
+  }, [userId]);
 
-  const regresar = () => {
-    navigate('/home');  // Redirige a la página principal
-  };
+  if (error) {
+    return <div>Hubo un error: {error}</div>;
+  }
+
+  console.log("Envios state:", envios); // Verifica el estado antes de renderizar
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      <div className="bg-white shadow-md p-8 rounded-md">
-        <header className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Detalles de los Envíos</h1>
-          <button className="text-red-500 font-bold" onClick={regresar}>Salir</button>
-        </header>
-        <h2 className="text-lg font-bold mb-4">Envíos asociados a tu cuenta</h2>
-        {envios.length > 0 ? (
-          <div>
-            {envios.map((envio) => (
-              <div key={envio.envio_id} className="mb-4">
-                <p><strong>ID del Envío:</strong> {envio.envio_id}</p>
-                <p><strong>Pedido ID:</strong> {envio.pedido_id}</p>
-                <p><strong>Prioridad:</strong> {envio.prioridad}</p>
-                <p><strong>Estado:</strong> {envio.estado}</p>
-                <p><strong>Detalles:</strong> {envio.detalles}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>No tienes envíos asociados a tus pedidos.</p>
-        )}
-        <button
-          className="mt-4 p-2 bg-blue-500 text-white rounded-md"
-          onClick={regresar}
-        >
-          Regresar
-        </button>
-      </div>
+      <h2 className="text-2xl font-bold mb-4">Mis Envíos</h2>
+      {envios.length === 0 ? (
+        <p>No tienes envíos registrados.</p>
+      ) : (
+        <ul className="space-y-4">
+          {envios.map((envio) => (
+            <li key={envio.id} className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
+              <p className="font-semibold">Pedido ID: {envio.pedido_id}</p>
+              <p>Detalles: {envio.detalles}</p>
+              <p>Prioridad: {envio.prioridad}</p>
+              <p>Estado: {envio.estado}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

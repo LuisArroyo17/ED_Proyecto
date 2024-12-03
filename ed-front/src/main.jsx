@@ -15,8 +15,8 @@ import { UserProvider } from './context/UserContext';
 import ProductDetail from './routes/CreateProduct.jsx';
 import ProductDetailE from './routes/ProductDetail.jsx';
 import { AdminLayout } from './layout/AdminLayout.jsx';
-import EnvioPage from './routes/EnvioPage.jsx'
 import { GestionarProductosPage, GestionarEnviosPage, GestionarPedidosPage } from './routes/admin';
+import EnvioPage from './routes/EnvioPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <UserProvider>
@@ -33,7 +33,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/PanelAdmin" element={<AdminPanelPage />} />
         <Route path="/CrearProducto" element={<ProductDetail />} />
         <Route path="/ModificarProducto" element={<ProductDetailE />} />
-        <Route path="/envio/:id" element={<EnvioPage />} />
+        <Route path="/envios/usuario/:id" element={<EnvioPage />} />
         
 
         <Route path='/admin' element={<AdminLayout />}>
