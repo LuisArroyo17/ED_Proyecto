@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Table } from "../../components/Table";
 import { TitleAdmin } from "../../components/TitleAdmin";
 import { Button } from "../../components/Button";  // Importa el Button correctamente
+import { useNavigate } from "react-router-dom";
 
 export function GestionarProductosPage() {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);  // Estado para controlar la visibilidad del modal
   const [productoEditando, setProductoEditando] = useState(null);  // Estado para el producto que se está editando
-
+  const navigate = useNavigate();
   // Función para obtener los productos desde la API
   const fetchProductos = async () => {
     try {
@@ -84,9 +85,10 @@ export function GestionarProductosPage() {
     },
     {
       name: 'Acciones',
-      cell: row => <Button onClick={() => handleEdit(row)}>Editar</Button>,  // Usando el Button personalizado
+      cell: row => <Button onClick={() => navigate(`/detalle-producto/${row.id}`)}>Editar</Button>,  // Usando el ID dinámico
     }
   ];
+  
 
   return (
     <section className="w-[80%] flex flex-col gap-10">

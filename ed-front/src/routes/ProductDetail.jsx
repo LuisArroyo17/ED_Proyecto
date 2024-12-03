@@ -1,9 +1,9 @@
 import { useParams , useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import ONG from '../../public/ONG.png';
+import ONG from '../../public/ONG.jpg';
 import Modal from '../components/Modal';
 
-const ProductDetailE = () => {
+const ProductDetailE1 = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -37,7 +37,7 @@ const ProductDetailE = () => {
           const response = await fetch(url, options);
           if (response.ok) {
             console.log(`Producto ${modalAction === 'delete' ? 'eliminado' : 'actualizado'} correctamente.`);
-            navigate('/home');
+            navigate('/admin');
           } else {
             console.error(`Error al ${modalAction === 'delete' ? 'eliminar' : 'actualizar'} el producto.`);
           }
@@ -77,7 +77,7 @@ const ProductDetailE = () => {
     return (
         <div className='w-full h-screen grid place-content-center'>
             <div 
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/admin')}
             className='ml-10'
             >
                 <svg height="48" width="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404.258 404.258"><path d="m289.927 18-24-18-151.596 202.129 151.596 202.129 24-18-138.096-184.129z"/></svg>
@@ -138,4 +138,4 @@ const ProductDetailE = () => {
     );
 };
 
-export default ProductDetailE;
+export default ProductDetailE1;

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import ONG from '../../public/ONG.png';
+// import ONG from '../../public/ONG.png';
 import Modal from '../components/Modal';
 
 const ProductDetail = () => {
