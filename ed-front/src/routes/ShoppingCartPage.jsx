@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import logo from '../assets/casa-silueta-negra-sin-puerta.png';
-import logo1 from '../assets/menu.png';
-import linea from '../assets/linea.png';
-import carrito from '../assets/carrito-de-compras (1).png';
 import { useUser } from "../context/UserContext";
 import {useNavigate} from "react-router-dom";
 import { HeaderClient } from "../components/HeaderClient";

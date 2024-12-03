@@ -20,7 +20,8 @@ app.register_blueprint(carritos_blueprint)
 
 if __name__ == "__main__":
   app.run(debug=True)
-
+  
+#define una ruta raiz
 @app.route('/')
 def home():
   return "Servidor funcionando correctamente"
