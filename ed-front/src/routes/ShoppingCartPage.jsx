@@ -140,7 +140,7 @@ const ShoppingCartPage = () => {
 
         <main className="flex flex-1 p-4 mt-10" >
         {/* Lista de productos en el carrito */}
-        <section className="w-2/3 bg-red-300 rounded-lg shadow-md p-5">
+        <section className="w-2/3 bg-white rounded-lg shadow-md p-5">
           <h2 className="text-lg font-bold mb-4">Productos</h2>
           <div className="space-y-4">
             {cart.map((producto) => (
@@ -178,7 +178,7 @@ const ShoppingCartPage = () => {
         </section>
 
         {/* Resumen de compra */}
-        <aside className="w-1/3 bg-blue-300 rounded-lg shadow-md p-4 ml-4">
+        <aside className="w-1/3 bg-white rounded-lg shadow-md p-4 ml-4">
           <h2 className="text-lg font-bold mb-4">Resumen de compra</h2>
           <div className="space-y-2">
             {cart.map((producto) => (

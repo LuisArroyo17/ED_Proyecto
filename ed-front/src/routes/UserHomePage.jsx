@@ -78,15 +78,9 @@ const UserHomePage = () => {
           </li>
           <li
             className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
-            onClick={() => handleCategoryClick("Ropa")}
+            onClick={() => handleCategoryClick("Tecnología")}
           >
-            Ropa
-          </li>
-          <li
-            className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
-            onClick={() => handleCategoryClick("Calzado")}
-          >
-            Calzado
+            Tecnología
           </li>
           <li
             className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
@@ -96,27 +90,33 @@ const UserHomePage = () => {
           </li>
           <li
             className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
+            onClick={() => handleCategoryClick("Dormitorio")}
+          >
+            Dormitorio
+          </li>
+          <li
+            className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
             onClick={() => handleCategoryClick("Muebles")}
           >
             Muebles
           </li>
           <li
             className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
-            onClick={() => handleCategoryClick("Accesorios")}
+            onClick={() => handleCategoryClick("Moda Hombre")}
           >
-            Accesorios
+            Moda Hombre
           </li>
           <li
             className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
-            onClick={() => handleCategoryClick("Hogar")}
+            onClick={() => handleCategoryClick("Deportes")}
           >
-            Hogar
+            Deportes
           </li>
           <li
             className="p-2 rounded-md cursor-pointer hover:bg-gray-300"
-            onClick={() => handleCategoryClick("Juguetes")}
+            onClick={() => handleCategoryClick("Línea banca")}
           >
-            Juguetes
+            Línea banca
           </li>
         </ul>
       </aside>
