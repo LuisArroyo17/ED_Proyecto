@@ -122,14 +122,19 @@ class EnviosController:
             return jsonify({"message": "Siguiente envio en la cola", "envio": siguiente_envio}), 200
         else:
             return jsonify({"message": "No hay envios en la cola"}), 404
-
-    def eliminar_envio(self, envio_id):
+    
+    def cancelar_envio(self, envio_id):
         for envio in self.envios_cola:
-            if envio.get("envio_id") == envio_id:
-                self.envios_cola.remove(envio) 
-                ModelEnvios().eliminar_envioDB(envio_id)
-                return jsonify({"message": "Envio eliminado", "envio": envio}), 200
+            if envio.get('envio_id') == int(envio_id):
+                resultado, status_code = ModelEnvios().actualizar_estadoDB(envio_id, 'Cancelado')
+                if status_code == 200:
+                    self.envios_cola.remove(envio)  # Eliminar el envío de la cola
+                    return jsonify({"message": "Envio Cancelado", "envio": envio}), 200
+                else:
+                    return jsonify(resultado), status_code
+
         return jsonify({"message": "Envio no encontrado"}), 404
+
 
     def actualizar_estado_envio(self, envio_id, nuevo_estado):
         for envio in self.envios_cola:

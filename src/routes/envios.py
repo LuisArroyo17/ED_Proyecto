@@ -20,10 +20,10 @@ def ver_siguiente_envio():
 def enviar_envio():
     return envios_controller.enviar_envio()
 
-# Ruta para eliminar un envío específico (POST)
-@envios_blueprint.route('/envios/eliminar/<int:envio_id>', methods=['POST'])
-def eliminar_envio(envio_id):
-    return envios_controller.eliminar_envio(envio_id)
+# Ruta para cancelar un envío específico (POST)
+@envios_blueprint.route('/envios/cancelar/<int:envio_id>', methods=['POST'])
+def cancelar_envio(envio_id):
+    return envios_controller.cancelar_envio(envio_id)
 
 # Ruta para obtener todos los envíos en la cola (GET)
 @envios_blueprint.route('/envios', methods=['GET'])
