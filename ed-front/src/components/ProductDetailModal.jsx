@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export const ProductDetailModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
+  const [notification, setNotification] = useState(null); // Estado para la notificación
 
   const handleAddToCart = async () => {
     console.log(`Añadido al carrito: ${product.nombre}, Cantidad: ${quantity}`);
@@ -17,13 +18,21 @@ export const ProductDetailModal = ({ product, onClose }) => {
         }),
       });
       const data = await response.json();
+
       if (response.ok) {
         console.log('Carrito actualizado:', data.carrito);
+        setNotification({ type: 'success', message: 'Producto añadido al carrito con éxito.' });
+        setTimeout(() => {
+          setNotification(null); // Limpiar notificación
+          onClose(); // Cerrar el modal
+        }, 2000); // Tiempo antes de cerrar el modal
       } else {
         console.error('Error al añadir al carrito:', data.message);
+        setNotification({ type: 'error', message: 'Error al añadir el producto al carrito.' });
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
+      setNotification({ type: 'error', message: 'Ocurrió un error al procesar la solicitud.' });
     }
   };
 
@@ -34,7 +43,7 @@ export const ProductDetailModal = ({ product, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-md shadow-md max-w-sm w-full">
+      <div className="bg-white p-6 rounded-md shadow-md max-w-sm w-full relative">
         <h2 className="text-xl font-bold mb-4">{product.nombre}</h2>
         <p className="text-sm text-gray-500">Categoría: {product.categoria}</p>
         <p className="text-lg font-bold my-2">S/. {product.precio}</p>
@@ -75,6 +84,17 @@ export const ProductDetailModal = ({ product, onClose }) => {
             Añadir al carrito
           </button>
         </div>
+
+        {/* Notificación */}
+        {notification && (
+          <div
+            className={`absolute top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-md text-white ${
+              notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'
+            }`}
+          >
+            {notification.message}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -146,7 +146,13 @@ const UserHomePage = () => {
           <div className="grid grid-cols-3 gap-4">
             {filteredProductos.map((producto) => (
               <div key={producto.id} className="bg-white shadow-md rounded-md p-4">
-                <div className="h-32 bg-gray-200 rounded-md mb-2"></div>
+                <div className="w-full h-30 bg-gray-200 rounded-md flex justify-center items-center">
+                  <img
+                    src={`${producto.imagen}`}
+                    alt={producto.nombre}
+                    className="max-w-full h-auto object-contain rounded-md"
+                  />
+                </div>
                 <h3 className="text-sm font-bold">{producto.nombre}</h3>
                 <p className="text-sm text-gray-500">S/. {producto.precio}</p>
                 <button
@@ -158,6 +164,8 @@ const UserHomePage = () => {
               </div>
             ))}
           </div>
+
+
         </section>
       </main>
 
