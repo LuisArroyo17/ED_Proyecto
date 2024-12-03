@@ -7,7 +7,9 @@ class EnviosController:
     def __init__(self):
         self.envios_cola = deque()
         self.envios_heap = []
-        
+        # Cargar envíos al inicializar el controlador
+        self.cargar_todos_envios_desde_db()
+            
     def agregar_envio_con_prioridad(self, envio_id, prioridad):
         heapq.heappush(self.envios_heap, (-prioridad, envio_id))
     
@@ -22,12 +24,18 @@ class EnviosController:
             return {"message": "No hay envios en el heap"}
 
     def mostrar_todos_los_envios_priorizados(self):
+        # Asegurarse de cargar los envíos desde la base de datos antes de mostrar
+        self.cargar_todos_envios_desde_db()
+        
+        if not self.envios_heap:
+            return []
+
         envios_priorizados = sorted(
             [(-prioridad, envio_id) for prioridad, envio_id in self.envios_heap],
             reverse=True
         )
         return [{"envio_id": eid, "prioridad": prioridad} for prioridad, eid in envios_priorizados]
-
+    
     def extraer_envio_con_mayor_prioridad(self):
         if self.envios_heap:
             prioridad, envio_id = heapq.heappop(self.envios_heap)
@@ -40,6 +48,7 @@ class EnviosController:
       
     def cargar_todos_envios_desde_db(self):
         self.envios_cola.clear()
+        self.envios_heap.clear()  # Asegurarse de limpiar el heap también
         envios, status_code = ModelEnvios().obtener_todos_envios()
         
         if status_code == 200:
@@ -53,14 +62,16 @@ class EnviosController:
                 }
                 if not any(e["envio_id"] == envio_dict["envio_id"] for e in self.envios_cola):
                     self.envios_cola.append(envio_dict)
+                    self.agregar_envio_con_prioridad(envio_dict["envio_id"], envio_dict["prioridad"])  # Agregar al heap
+
                         
     def cargar_envios_desde_db(self):
-
+        self.envios_cola.clear()
+        self.envios_heap.clear()  # Asegurarse de limpiar el heap también
         envios, status_code = ModelEnvios().obtener_envios_pendientes()
         
         if status_code == 200:
             for envio in envios:
-                
                 envio_dict = {
                     "envio_id": envio["id"],
                     "pedido_id": envio["pedido_id"],
@@ -71,17 +82,17 @@ class EnviosController:
                 
                 if not any(e["envio_id"] == envio_dict["envio_id"] for e in self.envios_cola):
                     self.envios_cola.append(envio_dict)
+                    self.agregar_envio_con_prioridad(envio_dict["envio_id"], envio_dict["prioridad"])  # Agregar al heap
+
                         
     def agregar_envio(self):
         pedido_id = request.json.get('pedido_id')
         detalles = request.json.get('detalles', '')
-        prioridad = request.json.get('prioridad', 1)
+        prioridad = request.json.get('prioridad', 1)  # Eliminada la línea duplicada
         estado = 'pendiente'
 
         resultado, status_code = ModelEnvios().agregar_envioDB(pedido_id, detalles, prioridad, estado)
         if status_code == 201:
-            
-            
             envio = {
                 "envio_id": resultado['data']['envio_id'],
                 "pedido_id": pedido_id,
@@ -97,7 +108,6 @@ class EnviosController:
         return jsonify(resultado), status_code
 
     def enviar_envio(self):
-        
         if self.envios_cola:
             envio = self.envios_cola.popleft()
             envio_id = envio.get("envio_id")
@@ -128,6 +138,9 @@ class EnviosController:
                 resultado, status_code = ModelEnvios().actualizar_estadoDB(envio_id, 'Cancelado')
                 if status_code == 200:
                     self.envios_cola.remove(envio)  # Eliminar el envío de la cola
+                    # También eliminar del heap
+                    self.envios_heap = [item for item in self.envios_heap if item[1] != envio_id]
+                    heapq.heapify(self.envios_heap)
                     return jsonify({"message": "Envio Cancelado", "envio": envio}), 200
                 else:
                     return jsonify(resultado), status_code
@@ -206,4 +219,3 @@ class EnviosController:
         if status_code == 200:
             return jsonify({"envios": envios}), 200
         return jsonify(envios), status_code
-
