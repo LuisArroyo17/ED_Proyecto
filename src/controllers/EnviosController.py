@@ -76,10 +76,12 @@ class EnviosController:
         pedido_id = request.json.get('pedido_id')
         detalles = request.json.get('detalles', '')
         prioridad = request.json.get('prioridad', 1)
+        prioridad = request.json.get('prioridad', 1)
         estado = 'pendiente'
 
         resultado, status_code = ModelEnvios().agregar_envioDB(pedido_id, detalles, prioridad, estado)
         if status_code == 201:
+            
             
             envio = {
                 "envio_id": resultado['data']['envio_id'],
@@ -113,20 +115,26 @@ class EnviosController:
         else:
             return jsonify({"message": "No hay envios para enviar"}), 404
 
+
     def ver_siguiente_envio(self):
         if self.envios_cola:
             siguiente_envio = self.envios_cola[0]  
             return jsonify({"message": "Siguiente envio en la cola", "envio": siguiente_envio}), 200
         else:
             return jsonify({"message": "No hay envios en la cola"}), 404
-
-    def eliminar_envio(self, envio_id):
+    
+    def cancelar_envio(self, envio_id):
         for envio in self.envios_cola:
-            if envio.get("envio_id") == envio_id:
-                self.envios_cola.remove(envio) 
-                ModelEnvios().eliminar_envioDB(envio_id)
-                return jsonify({"message": "Envio eliminado", "envio": envio}), 200
+            if envio.get('envio_id') == int(envio_id):
+                resultado, status_code = ModelEnvios().actualizar_estadoDB(envio_id, 'Cancelado')
+                if status_code == 200:
+                    self.envios_cola.remove(envio)  # Eliminar el envío de la cola
+                    return jsonify({"message": "Envio Cancelado", "envio": envio}), 200
+                else:
+                    return jsonify(resultado), status_code
+
         return jsonify({"message": "Envio no encontrado"}), 404
+
 
     def actualizar_estado_envio(self, envio_id, nuevo_estado):
         for envio in self.envios_cola:
@@ -158,6 +166,10 @@ class EnviosController:
         else:
             return jsonify({"message": "No hay envios"}), 404
         
+    def obtener_envio_id(self, envio_id):
+        resultado = ModelEnvios().obtener_envio_por_id(envio_id)
+        return jsonify({"envio": resultado}), 200
+        
     def enviar_envio_con_mayor_prioridad(self):
         if self.envios_heap:
             envio_con_prioridad = self.extraer_envio_con_mayor_prioridad()  # Extraemos el envío con mayor prioridad
@@ -180,4 +192,19 @@ class EnviosController:
                 return jsonify(envio_con_prioridad), 404  # No hay envíos en el heap
         else:
             return jsonify({"message": "No hay envios en el heap"}), 404
+        
+
+    # Obtener todos los envíos de un usuario
+    def obtener_envios_por_usuario(self, usuario_id):
+        envios, status_code = ModelEnvios().obtener_envio_por_id(usuario_id)
+        if status_code == 200:
+            return jsonify({"envios": envios}), 200
+        return jsonify(envios), status_code
+
+    # Obtener los envíos de un usuario por estado
+    def obtener_envios_por_estado(self, usuario_id, estado):
+        envios, status_code = ModelEnvios().obtener_envios_por_estado(usuario_id, estado)
+        if status_code == 200:
+            return jsonify({"envios": envios}), 200
+        return jsonify(envios), status_code
 

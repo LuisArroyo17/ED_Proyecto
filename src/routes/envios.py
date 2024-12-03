@@ -20,10 +20,10 @@ def ver_siguiente_envio():
 def enviar_envio():
     return envios_controller.enviar_envio()
 
-# Ruta para eliminar un envío específico (POST)
-@envios_blueprint.route('/envios/eliminar/<int:envio_id>', methods=['POST'])
-def eliminar_envio(envio_id):
-    return envios_controller.eliminar_envio(envio_id)
+# Ruta para cancelar un envío específico (POST)
+@envios_blueprint.route('/envios/cancelar/<int:envio_id>', methods=['POST'])
+def cancelar_envio(envio_id):
+    return envios_controller.cancelar_envio(envio_id)
 
 # Ruta para obtener todos los envíos en la cola (GET)
 @envios_blueprint.route('/envios', methods=['GET'])
@@ -65,3 +65,22 @@ def mostrar_todos_los_envios_priorizados():
 @envios_blueprint.route('/envios/enviar_mayor_prioridad', methods=['POST'])
 def enviar_envio_con_mayor_prioridad():
     return envios_controller.enviar_envio_con_mayor_prioridad()
+
+# Ruta para obtener un envio específico de la base de datos (GET)
+@envios_blueprint.route('/envios/<int:envio_id>', methods=['GET'])
+def obtener_envio_id(envio_id):
+    return envios_controller.obtener_envio_id(envio_id)
+
+# Ruta para obtener todos los envíos de un usuario (GET)
+@envios_blueprint.route('/envios/usuario/<int:usuario_id>', methods=['GET'])
+def obtener_envios_por_usuario(usuario_id):
+    return envios_controller.obtener_envios_por_usuario(usuario_id)
+
+@envios_blueprint.route('/envios/estado', methods=['GET'])
+def obtener_envios_por_estado():
+    usuario_id = request.args.get('usuario_id')  # Se pasa el usuario_id como parámetro
+    estado = request.args.get('estado')  # El estado se pasa como parámetro
+    return envios_controller.obtener_envios_por_estado(usuario_id, estado)
+
+
+
