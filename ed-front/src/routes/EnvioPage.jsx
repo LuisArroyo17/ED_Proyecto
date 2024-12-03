@@ -3,7 +3,7 @@ import { useUser } from "../context/UserContext";
 
 const EnvioPage = () => {
   const { userId } = useUser();
-  const [envios, setEnvios] = useState([]);
+  const [envios, setEnvios] = useState([]); // Inicializamos envios como un arreglo vacío
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -22,10 +22,17 @@ const EnvioPage = () => {
 
         const data = await response.json();
         console.log("Envios data:", data); // Verifica los datos que recibes de la API
-        setEnvios(data);
+
+        // Aseguramos que data.envios sea un arreglo
+        if (Array.isArray(data.envios)) {
+          setEnvios(data.envios);
+        } else {
+          throw new Error("La respuesta no contiene un arreglo de envíos.");
+        }
       } catch (error) {
         console.error(error);
         setError(error.message);
+        setEnvios([]); // En caso de error, aseguramos que el estado envios sea un arreglo vacío
       }
     };
 
