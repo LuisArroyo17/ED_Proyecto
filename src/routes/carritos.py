@@ -4,11 +4,6 @@ from controllers.CarritosController import CarritosController
 # Crear un blueprint para el carrito
 carritos_blueprint = Blueprint('carrito', __name__)
 
-# Ruta para traer todos los productos de la BD
-@carritos_blueprint.route('/productos/traer/todos', methods=['GET'])
-def traer_todo():
-    return CarritosController().traer_productos()
-
 # Ruta para agregar un producto de manera temporal al carrito (insertarlo en una lista doble enlazada)
 @carritos_blueprint.route('/carrito/temporal/agregar', methods=['POST'])
 def añadir_carrito_temporal():
@@ -29,7 +24,7 @@ def obtener_carrito_temporal():
 def vaciar_carrito_temporal():
     return CarritosController().vaciar_carrito_temporal()
 
-# Ruta para subir de manera oficial los porductos del carrito de compras
+# Ruta para subir de manera oficial los productos del carrito de compras
 @carritos_blueprint.route('/carrito/oficial', methods=['POST'])
 def agregar_producto_carrito_bd():
     usuario_id = request.json.get('usuario_id')

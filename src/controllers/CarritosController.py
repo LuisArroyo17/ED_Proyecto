@@ -59,13 +59,6 @@ class CarritosController:
         # Usa la lista doblemente enlazada para el carrito temporal
         self.carrito_temporal = carrito_temporal_global
     
-    def traer_productos(self):
-        # Crear una instancia de ModelCarrito
-        model_carrito = ModelCarrito()
-        
-        productos = model_carrito.obtener_productosDB()
-        return jsonify(productos)
-    
     def añadir_carrito_temporal(self):
         producto_id = request.json.get('producto_id')
         cantidad = request.json.get('cantidad')
