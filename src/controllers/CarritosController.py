@@ -107,6 +107,13 @@ class CarritosController:
             self.carrito_temporal.eliminar(producto_id)
         return jsonify(resultados)
     
+    def vaciar_carrito_temporal(self):
+        productos = self.carrito_temporal.obtener_productos()
+        for producto in productos:
+            producto_id = producto['id']
+            self.carrito_temporal.eliminar(producto_id)
+        return {"message": "se borro con exito"}
+    
     def obtener_carrito(self, usuario_id):
         model_carrito = ModelCarrito()
         carrito = model_carrito.obtener_carritoDB(usuario_id)

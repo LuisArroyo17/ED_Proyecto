@@ -24,6 +24,11 @@ def eliminar_producto_temporal():
 def obtener_carrito_temporal():
     return CarritosController().obtener_carrito_temporal()
 
+# Ruta para vaciar el carrito temporal
+@carritos_blueprint.route('/carrito/temporal/vaciar', methods=['DELETE'])
+def vaciar_carrito_temporal():
+    return CarritosController().vaciar_carrito_temporal()
+
 # Ruta para subir de manera oficial los porductos del carrito de compras
 @carritos_blueprint.route('/carrito/oficial', methods=['POST'])
 def agregar_producto_carrito_bd():

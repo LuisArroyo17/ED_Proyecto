@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom"; 
-
+import { HeaderClient } from "../components/HeaderClient";
 const OrderPage = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,23 +96,7 @@ const OrderPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Encabezado */}
-      <header className="flex justify-between items-center bg-white shadow-md p-4">
-        <div className="flex items-center space-x-4">
-          <button className="text-xl">
-            <i className="fas fa-bars"></i>
-          </button>
-          <h1 className="text-2xl font-bold">Realizar pedido</h1>
-        </div>
-        <div className="flex items-center space-x-4">
-          <button className="relative">
-            <i className="fas fa-shopping-cart text-xl"></i>
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
-              {productos.length}
-            </span>
-          </button>
-          <button className="text-red-500 font-bold">Salir</button>
-        </div>
-      </header>
+      <HeaderClient/>
 
       {/* Contenido */}
       <main className="flex flex-1 p-4">
