@@ -122,3 +122,44 @@ class ModelEnvios:
         except Exception as e:
             print(f"Error al obtener el envío por ID: {str(e)}")
             return None
+
+        #Método para obtener los envíos de un usuario
+    def obtener_envio_por_id(self, usuario_id):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("""
+                SELECT e.id, e.pedido_id, e.detalles, e.prioridad, e.estado
+                FROM envios e
+                JOIN pedidos p ON e.pedido_id = p.id
+                WHERE p.usuario_id = %s;
+            """, (usuario_id,))
+            envios = cursor.fetchall()
+            return envios, 200
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": "Error al obtener los envíos del usuario",
+                "error": str(e)
+            }, 500
+
+        
+        #Método para obtener los envíos de un usuario por estado:
+    def obtener_envios_por_estado(self, usuario_id, estado):
+        cursor = self.db.cursor()
+        try:
+            cursor.execute("""
+                SELECT e.id, e.pedido_id, e.detalles, e.prioridad, e.estado
+                FROM envios e
+                JOIN pedidos p ON e.pedido_id = p.id
+                WHERE p.usuario_id = %s AND e.estado = %s;
+            """, (usuario_id, estado))
+            envios = cursor.fetchall()
+            return envios, 200
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": "Error al obtener los envíos del usuario",
+                "error": str(e)
+            }, 500
+
+

@@ -70,3 +70,17 @@ def enviar_envio_con_mayor_prioridad():
 @envios_blueprint.route('/envios/<int:envio_id>', methods=['GET'])
 def obtener_envio_id(envio_id):
     return envios_controller.obtener_envio_id(envio_id)
+
+# Ruta para obtener todos los envíos de un usuario (GET)
+@envios_blueprint.route('/envios/usuario/<int:usuario_id>', methods=['GET'])
+def obtener_envios_por_usuario(usuario_id):
+    return envios_controller.obtener_envios_por_usuario(usuario_id)
+
+@envios_blueprint.route('/envios/estado', methods=['GET'])
+def obtener_envios_por_estado():
+    usuario_id = request.args.get('usuario_id')  # Se pasa el usuario_id como parámetro
+    estado = request.args.get('estado')  # El estado se pasa como parámetro
+    return envios_controller.obtener_envios_por_estado(usuario_id, estado)
+
+
+

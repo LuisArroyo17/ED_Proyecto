@@ -192,4 +192,19 @@ class EnviosController:
                 return jsonify(envio_con_prioridad), 404  # No hay envíos en el heap
         else:
             return jsonify({"message": "No hay envios en el heap"}), 404
+        
+
+    # Obtener todos los envíos de un usuario
+    def obtener_envios_por_usuario(self, usuario_id):
+        envios, status_code = ModelEnvios().obtener_envio_por_id(usuario_id)
+        if status_code == 200:
+            return jsonify({"envios": envios}), 200
+        return jsonify(envios), status_code
+
+    # Obtener los envíos de un usuario por estado
+    def obtener_envios_por_estado(self, usuario_id, estado):
+        envios, status_code = ModelEnvios().obtener_envios_por_estado(usuario_id, estado)
+        if status_code == 200:
+            return jsonify({"envios": envios}), 200
+        return jsonify(envios), status_code
 
