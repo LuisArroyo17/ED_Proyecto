@@ -50,7 +50,8 @@ class PedidosController:
                     "usuario_id": pedido["usuario_id"],
                     "fecha": str(pedido["fecha"]),  
                     "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"], 
-                    "estado": pedido["estado"]
+                    "estado": pedido["estado"],
+                    "prioridad": pedido["prioridad"]
                 }
                 if not any(p["pedido_id"] == pedido_dict["pedido_id"] for p in self.pedidos_cola):
                     self.pedidos_cola.append(pedido_dict)
@@ -67,7 +68,8 @@ class PedidosController:
                     "usuario_id": pedido["usuario_id"],
                     "fecha": str(pedido["fecha"]),  
                     "total": float(pedido["total"]) if isinstance(pedido["total"], Decimal) else pedido["total"], 
-                    "estado": pedido["estado"]
+                    "estado": pedido["estado"],
+                    "prioridad": pedido["prioridad"]
                 }
                 
                 if not any(p["pedido_id"] == pedido_dict["pedido_id"] for p in self.pedidos_cola):
@@ -78,8 +80,9 @@ class PedidosController:
         total = request.json.get('total')
         estado = request.json.get('estado', 'pendiente')
         detalles = request.json.get('detalles', [])
+        prioridad = request.json.get('prioridad')
 
-        resultado, status_code = ModelPedido().agregar_pedidoDB(usuario_id, total, estado, detalles)
+        resultado, status_code = ModelPedido().agregar_pedidoDB(usuario_id, total, estado, detalles, prioridad)
         if status_code == 201:
             
             pedido = {
@@ -87,7 +90,8 @@ class PedidosController:
                 "usuario_id": usuario_id,
                 "total": total,
                 "estado": estado,
-                "detalles": detalles
+                "detalles": detalles,
+                "prioridad": prioridad
             }
             self.pedidos_cola.append(pedido)
         return jsonify(resultado), status_code
@@ -160,3 +164,10 @@ class PedidosController:
     def eliminar_pedido(self, id):
         resultado = ModelPedido().eliminar_pedidoDB(id)
         return resultado
+    
+    def mostrar_detalles_pedido(self, pedido_id):
+        detalles, status_code = ModelPedido().obtener_detalles_pedido(pedido_id)
+        if status_code == 200:
+            return jsonify({"detalles": detalles}), 200
+        else:
+            return jsonify(detalles), status_code

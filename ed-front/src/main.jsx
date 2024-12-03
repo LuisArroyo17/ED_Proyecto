@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'
 
 import LoginForm from './routes/LoginForm.jsx'
-import RegisterForm from './routes/RegisterForm.jsx' 
+import RegisterForm from './routes/RegisterForm.jsx'
 import UserHomePage from './routes/UserHomePage.jsx'
 import OrderPage from './routes/OrderPage.jsx'
 import OrderQueuePage from './routes/OrderQueuePage.jsx'
@@ -14,6 +14,8 @@ import OrderSuccessPage from './routes/OrderSuccessPage.jsx'
 import { UserProvider } from './context/UserContext';
 import ProductDetail from './routes/CreateProduct.jsx';
 import ProductDetailE from './routes/ProductDetail.jsx';
+import { AdminLayout } from './layout/AdminLayout.jsx';
+import { GestionarProductosPage, GestionarEnviosPage, GestionarPedidosPage } from './routes/admin';
 
 createRoot(document.getElementById('root')).render(
   <UserProvider>
@@ -30,7 +32,6 @@ createRoot(document.getElementById('root')).render(
         <Route path="/PanelAdmin" element={<AdminPanelPage />} />
         <Route path="/CrearProducto" element={<ProductDetail />} />
         <Route path="/ModificarProducto" element={<ProductDetailE />} />
-        <Route path="/envio" element={<EnvioPage />} /> 
 
         <Route path='/admin' element={<AdminLayout />}>
           <Route path="gestionar-productos" element={<GestionarProductosPage />} />

@@ -76,10 +76,12 @@ class EnviosController:
         pedido_id = request.json.get('pedido_id')
         detalles = request.json.get('detalles', '')
         prioridad = request.json.get('prioridad', 1)
+        prioridad = request.json.get('prioridad', 1)
         estado = 'pendiente'
 
         resultado, status_code = ModelEnvios().agregar_envioDB(pedido_id, detalles, prioridad, estado)
         if status_code == 201:
+            
             
             envio = {
                 "envio_id": resultado['data']['envio_id'],
@@ -112,6 +114,7 @@ class EnviosController:
                 return jsonify(resultado), status_code
         else:
             return jsonify({"message": "No hay envios para enviar"}), 404
+
 
     def ver_siguiente_envio(self):
         if self.envios_cola:

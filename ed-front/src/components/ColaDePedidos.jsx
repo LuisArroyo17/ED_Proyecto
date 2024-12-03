@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ColaDePedidos = ({ pedidos }) => {
+  console.log(pedidos);
   return (
     <section className="w-full bg-white rounded-lg shadow-md p-4">
       <h2 className="text-lg font-bold mb-4">Cola de pedidos</h2>

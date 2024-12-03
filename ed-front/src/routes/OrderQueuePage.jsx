@@ -14,7 +14,7 @@ const OrderQueuePage = () => {
       const data = await response.json();
       setPedidos(data.pedidos || []);
       if (data.pedidos && data.pedidos.length > 0) {
-        setProximoPedido(data.pedidos[0]); // Tomamos el primer pedido
+        setProximoPedido(data.pedidos[0]); 
       } else {
         setProximoPedido(null);
       }
@@ -31,25 +31,49 @@ const OrderQueuePage = () => {
     if (proximoPedido) {
       console.log('Procesando pedido:', proximoPedido.pedido_id);
       try {
-        const response = await fetch('http://127.0.0.1:5000/pedidos/procesar', {
+        const responsePedido = await fetch('http://127.0.0.1:5000/pedidos/procesar', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ pedido_id: proximoPedido.pedido_id }),
         });
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
-        if (data.message === 'Pedido procesado') {
+  
+        const dataPedido = await responsePedido.json();
+        console.log('Respuesta del servidor para pedido:', dataPedido);
+  
+        if (dataPedido.message === 'Pedido procesado') {
           setMensaje('Pedido procesado exitosamente');
           console.log('Pedido procesado exitosamente');
-          cargarPedidos()
+  
+          const envioResponse = await fetch('http://127.0.0.1:5000/envios', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              pedido_id: proximoPedido.pedido_id,
+              detalles: 'Envio de televisor a SJL', 
+              prioridad: 1,
+              estado: 'pendiente',
+            }),
+          });
+  
+          const dataEnvio = await envioResponse.json();
+          console.log('Respuesta del servidor para envío:', dataEnvio);
+  
+          if (dataEnvio.message === 'Envio agregado') {
+            console.log('Envio agregado correctamente');
+          }
+  
+          cargarPedidos();
         }
       } catch (error) {
-        console.error('Error al procesar el pedido:', error);
+        console.error('Error al procesar el pedido o el envío:', error);
       }
     }
   };
+  
 
   const cancelarPedido = async () => {
     if (proximoPedido) {
@@ -71,15 +95,6 @@ const OrderQueuePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="flex justify-between items-center bg-white shadow-md p-4">
-        <div className="flex items-center space-x-4">
-          <button className="text-xl">
-            <i className="fas fa-bars"></i>
-          </button>
-          <h1 className="text-2xl font-bold">Gestión de Pedidos</h1>
-        </div>
-      </header>
-
       <main className="flex flex-1 p-4">
         <div className="w-1/2 bg-white rounded-lg shadow-md p-4">
           <ColaDePedidos pedidos={pedidos} />
