@@ -1,7 +1,7 @@
 import React from "react";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-
+import { HeaderClient } from "../components/HeaderClient";
 const UserHomePage = () => {
   const { userId } = useUser();
   console.log("ID del usuario:", userId);
@@ -12,6 +12,8 @@ const UserHomePage = () => {
   };
   
   return (
+    <>
+     <HeaderClient/>
     <div className="min-h-screen bg-gray-100 flex">
       {/* Menú lateral */}
       <aside className="w-1/4 bg-white shadow-md p-4">
@@ -31,18 +33,6 @@ const UserHomePage = () => {
 
       {/* Contenido principal */}
       <main className="flex-1 p-4">
-        <header className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">StockEase</h1>
-          <div className="flex items-center space-x-4">
-            <button className="relative">
-              <i className="fas fa-shopping-cart text-xl"></i>
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex justify-center items-center rounded-full">
-                2
-              </span>
-            </button>
-            <button className="text-red-500 font-bold">Salir</button>
-          </div>
-        </header>
 
         {/* Barra de búsqueda */}
         <div className="mb-4">
@@ -91,6 +81,7 @@ const UserHomePage = () => {
         </section>
       </main>
     </div>
+    </>
   );
 };
 
