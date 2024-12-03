@@ -3,10 +3,28 @@ import React, { useState } from "react";
 export const ProductDetailModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     console.log(`Añadido al carrito: ${product.nombre}, Cantidad: ${quantity}`);
-    // Aquí podrías llamar una función para añadir al carrito
-    onClose(); // Cierra el modal después de añadir al carrito
+    try {
+      const response = await fetch('http://localhost:5000/carrito/temporal/agregar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          producto_id: product.id,
+          cantidad: quantity,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Carrito actualizado:', data.carrito);
+      } else {
+        console.error('Error al añadir al carrito:', data.message);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
   };
 
   const incrementQuantity = () => setQuantity(quantity + 1);
