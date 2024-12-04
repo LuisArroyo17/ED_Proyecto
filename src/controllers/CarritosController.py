@@ -52,11 +52,11 @@ class ListaEnlazadaDoble:
 # Variable global para el carrito temporal
 carrito_temporal_global = ListaEnlazadaDoble()
 
-# Controlador para manejar el carrito
+
 class CarritosController:
     
     def __init__(self):
-        # Usa la lista doblemente enlazada para el carrito temporal
+       
         self.carrito_temporal = carrito_temporal_global
     
     def añadir_carrito_temporal(self):
@@ -66,13 +66,13 @@ class CarritosController:
         model_carrito = ModelCarrito()
         productos = model_carrito.obtener_productosDB()
     
-        # Buscar el producto en la base de datos
+      
         producto_seleccionado = next((prod for prod in productos if prod['id'] == producto_id), None)
     
         if producto_seleccionado:
-            # Hacer una copia del producto para no modificar el original
+            
             producto_copia = producto_seleccionado.copy()
-            producto_copia['cantidad'] = cantidad  # Agregar cantidad al producto seleccionado
+            producto_copia['cantidad'] = cantidad 
             self.carrito_temporal.agregar(producto_copia)
             return {"message": "Producto agregado al carrito temporal", "carrito": self.carrito_temporal.obtener_productos()}
         else:
@@ -96,7 +96,7 @@ class CarritosController:
             cantidad = producto['cantidad']
             resultado = model_carrito.agregar_carritoDB(usuario_id, producto_id, cantidad)
             resultados.append(resultado)
-            # Eliminar el producto de la lista temporal después de agregarlo a la base de datos
+            
             self.carrito_temporal.eliminar(producto_id)
         return jsonify(resultados)
     
