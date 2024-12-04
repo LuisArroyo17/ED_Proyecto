@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import ONG from '../../public/ONG.png';
+// import ONG from '../../public/ONG.png';
 import Modal from '../components/Modal';
 
 const ProductDetail = () => {
@@ -72,7 +72,7 @@ const ProductDetail = () => {
     return (
         <div className='w-full h-screen grid place-content-center'>
             <div 
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/admin')}
             className='ml-10'
             >
                 <svg height="48" width="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404.258 404.258"><path d="m289.927 18-24-18-151.596 202.129 151.596 202.129 24-18-138.096-184.129z"/></svg>

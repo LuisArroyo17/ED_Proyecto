@@ -11,7 +11,7 @@ class Config:
     DB_CONFIG = {
         'host': os.getenv("DATABASE_HOST", "localhost"),
         'user': os.getenv("DATABASE_USER", "root"),
-        'password': os.getenv("DATABASE_PASSWORD", "root"),
+        'password': os.getenv("DATABASE_PASSWORD", "Rodrigo1"),
         'database': os.getenv("DATABASE_NAME", "ed-db"),
         'cursorclass': pymysql.cursors.DictCursor  
     }
