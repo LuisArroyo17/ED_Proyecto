@@ -19,7 +19,9 @@ const ColaDeEnvios = ({ envios }) => {
             <div>
               <p className="font-bold">ID del envío: {envio.envio_id}</p>
               <p className="text-sm text-gray-500">Estado: {envio.estado}</p>
-              <p className="text-sm text-gray-500">Prioridad: {envio.prioridad ? 'Alta' : 'Normal'}</p>
+              <p className="text-sm text-gray-500">
+                Prioridad: {envio.prioridad === 2 ? 'Alta' : 'Normal'}
+              </p>
             </div>
           </div>
         ))}
