@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ColaDeEnvios from '../components/ColaDeEnvios';
-import ProximoEnvioEnCola from '../components/ProximoEnvioEnCola';
-import ProximoEnvioEnColaConPrioridad from '../components/ProximoEnvioEnColaConPrioridad';  // Nuevo componente
 import { useNavigate } from 'react-router-dom';
 
 const EnvioQueuePage = () => {
   const [envios, setEnvios] = useState([]);
-  const [proximoEnvio, setProximoEnvio] = useState(null);
-  const [envioConPrioridad, setEnvioConPrioridad] = useState(null);
   const [mensaje, setMensaje] = useState('');
   const navigate = useNavigate();
 
@@ -17,48 +13,45 @@ const EnvioQueuePage = () => {
       const response = await fetch('http://127.0.0.1:5000/envios');
       const data = await response.json();
       setEnvios(data.envios || []);
-      if (data.envios && data.envios.length > 0) {
-        setProximoEnvio(data.envios[0]);
-      } else {
-        setProximoEnvio(null);
-      }
     } catch (error) {
-      console.error('Error al cargar los envíos:', error);
+      console.error("Error al cargar los envíos:", error);
     }
   };
 
-  // Cargar el siguiente envío con prioridad
-  const cargarEnvioConPrioridad = async () => {
+  // Cargar el siguiente envío
+  const cargarSiguienteEnvio = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/envios/mayor_prioridad');
+      const response = await fetch('http://127.0.0.1:5000/envios/ver_siguiente');
       const data = await response.json();
-      setEnvioConPrioridad(data || null);
+      if (data.envio) {
+        setEnvios([data.envio, ...envios]);  // Agregar el próximo envío al principio de la cola
+      }
     } catch (error) {
-      console.error('Error al cargar el envío con mayor prioridad:', error);
+      console.error("Error al cargar el siguiente envío:", error);
     }
   };
 
   useEffect(() => {
     cargarEnvios();
-    cargarEnvioConPrioridad();
   }, []);
 
   // Enviar un envío normal
   const enviarEnvio = async () => {
-    if (proximoEnvio) {
+    if (envios.length > 0) {
+      const envio = envios[0];
       try {
         const responseEnvio = await fetch('http://127.0.0.1:5000/envios/enviar', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ envio_id: proximoEnvio.envio_id }),
+          body: JSON.stringify({ envio_id: envio.envio_id }),
         });
 
         const dataEnvio = await responseEnvio.json();
         if (dataEnvio.message === 'Envío realizado') {
           setMensaje('Envío realizado exitosamente');
-          cargarEnvios();
+          cargarEnvios();  // Actualiza la lista después de enviar
         }
       } catch (error) {
         console.error('Error al enviar el envío:', error);
@@ -68,21 +61,20 @@ const EnvioQueuePage = () => {
 
   // Enviar un envío con prioridad
   const enviarEnvioConPrioridad = async () => {
-    if (envioConPrioridad) {
+    if (envios.length > 0) {
+      const envio = envios[0];
       try {
         const responseEnvio = await fetch('http://127.0.0.1:5000/envios/enviar_mayor_prioridad', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ envio_id: envioConPrioridad.envio_id }),
         });
 
         const dataEnvio = await responseEnvio.json();
         if (dataEnvio.message === 'Envío con prioridad realizado') {
           setMensaje('Envío con prioridad realizado');
-          cargarEnvios();
-          cargarEnvioConPrioridad();
+          cargarEnvios();  // Actualiza la lista después de enviar con prioridad
         }
       } catch (error) {
         console.error('Error al enviar con prioridad:', error);
@@ -91,18 +83,21 @@ const EnvioQueuePage = () => {
   };
 
   // Cancelar un envío
-  const cancelarEnvio = async (envioId) => {
-    try {
-      const response = await fetch(`http://127.0.0.1:5000/envios/cancelar/${envioId}`, {
-        method: 'POST',
-      });
-      const data = await response.json();
-      if (data.message === 'Envío cancelado') {
-        setMensaje('Envío cancelado correctamente');
-        cargarEnvios();
+  const cancelarEnvio = async () => {
+    if (envios.length > 0) {
+      const envio = envios[0];
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/envios/cancelar/${envio.envio_id}`, {
+          method: 'POST',
+        });
+        const data = await response.json();
+        if (data.message === 'Envío cancelado') {
+          setMensaje('Envío cancelado correctamente');
+          cargarEnvios();  // Actualiza la lista después de cancelar
+        }
+      } catch (error) {
+        console.error('Error al cancelar el envío:', error);
       }
-    } catch (error) {
-      console.error('Error al cancelar el envío:', error);
     }
   };
 
@@ -112,23 +107,34 @@ const EnvioQueuePage = () => {
         <div className="w-1/2 bg-white rounded-lg shadow-md p-4">
           <ColaDeEnvios envios={envios} />
         </div>
-        {proximoEnvio ? (
-          <ProximoEnvioEnCola
-            envio={proximoEnvio}
-            onEnviar={enviarEnvio}
-            onCancelar={() => cancelarEnvio(proximoEnvio.envio_id)}
-          />
-        ) : (
-          <div className="w-1/2 bg-white rounded-lg shadow-md p-4 ml-4">
-            <h2 className="text-lg font-bold mb-4">No hay envíos en cola</h2>
-          </div>
-        )}
+        <div className="w-1/2 bg-white rounded-lg shadow-md p-4 ml-4">
+          {envios.length > 0 ? (
+            <div className="space-y-4">
+              {/* Título para la sección de solicitudes de envío entrante */}
+              <h2 className="text-xl font-bold mb-4">Para la Solicitud de Envío Entrante</h2>
 
-        <ProximoEnvioEnColaConPrioridad
-          envioConPrioridad={envioConPrioridad}
-          onEnviarConPrioridad={enviarEnvioConPrioridad}
-          onCancelar={cancelarEnvio}
-        />
+              {/* Contenedor de botones "Enviar" y "Cancelar Envío" */}
+              <div className="flex justify-between items-center">
+                <button onClick={enviarEnvio} className="bg-blue-500 text-white p-2 rounded-md flex-1">
+                  Enviar
+                </button>
+                <button onClick={cancelarEnvio} className="bg-red-500 text-white p-2 rounded-md ml-4">
+                  Cancelar Envío
+                </button>
+              </div>
+
+              {/* Título para la sección de solicitudes de envío ordenadas por prioridad */}
+              <h2 className="text-xl font-bold mt-6 mb-4">Para la Solicitud de Envío Ordenadas por Prioridad</h2>
+              
+              {/* Botón "Enviar con Prioridad" debajo de los otros botones */}
+              <button onClick={enviarEnvioConPrioridad} className="bg-yellow-500 text-white p-2 rounded-md w-full mt-4">
+                Enviar con Prioridad
+              </button>
+            </div>
+          ) : (
+            <h2 className="text-lg font-bold">No hay envíos en cola</h2>
+          )}
+        </div>
       </main>
 
       {mensaje && (
@@ -141,3 +147,6 @@ const EnvioQueuePage = () => {
 };
 
 export default EnvioQueuePage;
+
+
+
