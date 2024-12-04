@@ -17,7 +17,7 @@ import ProductDetailE from './routes/ProductDetail.jsx';
 import { AdminLayout } from './layout/AdminLayout.jsx';
 import { GestionarProductosPage, GestionarEnviosPage, GestionarPedidosPage } from './routes/admin';
 import EnvioPage from './routes/EnvioPage.jsx';
-
+import ProductDetailE1 from './routes/ProductDetail.jsx';
 createRoot(document.getElementById('root')).render(
   <UserProvider>
     {/* <StrictMode> */}
@@ -34,7 +34,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/CrearProducto" element={<ProductDetail />} />
         <Route path="/ModificarProducto" element={<ProductDetailE />} />
         <Route path="/envios/usuario/:id" element={<EnvioPage />} />
-        
+        <Route path="/detalle-producto/:id" element={<ProductDetailE1 />} />
 
         <Route path='/admin' element={<AdminLayout />}>
           <Route path="gestionar-productos" element={<GestionarProductosPage />} />
