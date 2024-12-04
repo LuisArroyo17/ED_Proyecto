@@ -1,7 +1,7 @@
-# Define el nodo de la lista doblemente enlazada
 from flask import jsonify, request
 from models.ModelCarrito import ModelCarrito
 
+# Define el nodo de la lista doblemente enlazada
 class NodoDoble:
     def __init__(self, producto):
         self.producto = producto
